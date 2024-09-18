@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+.navi{
+    background-color: #192d36;
+}
+.nav_buttons{
+    margin-left: 25px;
+    color: #fcff61;
+    font-weight: bold;
+}
+
+.main{
+    background-color: transparent;
+    height: 100vh; 
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+.main video{
+    position: absolute;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+
+    transform: translate(-15%,-15%);
+    z-index: -1;
+}
+
+.nav_buttons:hover{
+    transform: scale(1.05);
+    text-decoration: underline;
+    color: whitesmoke;
+}
+
+.h11{
+    color: whitesmoke;
+    font-weight: bolder;
+}
+.h11:hover{
+    transform: scale(1.05);
+    transition-duration: 0.3s;
+}
+
+.foot{
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    background-color: #31596a;
+    align-items: center;
+}
+.foot p{
+    color: black;
+}
+
+.foot a{
+    text-decoration: none;
+    color: black;
+
+}
+
+.foot a:hover{
+    color: white;
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+.grid-container {
+    margin: 25px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    gap: 10px;
+  }
+
+.grid-item {
+    background-color: rgba(240, 255, 240, 0.4);
+    border-radius: 5px;
+    box-shadow: 0 4px 12px black;
+    padding: 20px;
+    padding-top: 5px;
+    text-align: center;
+    
+  }
+
+.grid-item:hover {
+    background: rgba(240, 255, 240, 0.6);
+    box-shadow: 0 8px 16px black;
+    transform: scale(1.05) ; 
+    cursor: pointer; 
+    font-family: "Segoe UI";
+    transition: all 0.3s ease;
+}
+
+
+.item1{
+    grid-row: span 4;
+    padding: 5px;
+    width: 35vb;
+    align-content: center;
+    padding-bottom: 70px;
+}
+.item1 ul{
+    list-style-type: circle;
+    text-align: left;
+}
+.item2{
+    grid-column: span 4;
+    grid-row: span 3;
+}
+
+.item2 ul{
+    text-align: left;
+}
+
+/* .foot{
+    position: sticky;
+    background-color: #31596a;
+}
+
+.foot *{
+    padding-top: 15px;
+    padding-bottom: 15px;
+} */
+/* py-3 my-4 border-top  */
