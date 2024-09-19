@@ -21,6 +21,7 @@ body{
     justify-content: space-between;
     background-color: #192d36;
     align-items: center;
+    width: 100vw;
     z-index: 1000;
 }
 
@@ -63,6 +64,7 @@ body{
     padding: 20px;
     justify-content: space-between;
     background-color: #29434e;
+    width: 100vw;
     align-items: center;
 }
 .foot p{
