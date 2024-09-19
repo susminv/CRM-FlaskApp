@@ -1,0 +1,44 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css',external=True)}}">
+ {% endblock %}
+{% block title %}Home Page{% endblock %}
+
+{% block navbar %}
+<nav class="navi">
+    <img src="../static/images/5.png" alt="logo" width="180px" class="icon">
+
+    <h1 class="title">
+        LOREM INFOTECH
+    </h1>
+
+    <span style="margin-right: 20px;">
+        <button type="button" class="button" id="Home">Home</button>
+        <button type="button" class="button" id="About">About Us</button>
+        <button type="button" class="button" id="Contact">Login/Sign Up</button>
+    </span>
+
+</nav>
+{% endblock %}
+
+
+
+{% block content %}
+
+<main class="main">
+
+
+    <article class="grid-container">
+        {% block page_content %}
+        {#we will fill contents from message.html#}
+        {% endblock  %}
+    </article>
+
+</main>
+
+    <footer class="foot">
+        <p>Phone : +071-3207743</p>
+        <p>Copyright@Lorem2024</p>
+        <a href="mailto:susminvraj@gmail.com">Email : infotech@lorem.com</a>
+    </footer>
+{% endblock %}

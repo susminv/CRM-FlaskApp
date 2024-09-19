@@ -17,4 +17,4 @@ boostrap = Bootstrap(app)
 
 @app.route('/')
 def index():
-    return render_template('hom.html')
+    return render_template('Base.html')
