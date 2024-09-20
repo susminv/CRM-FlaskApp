@@ -15,6 +15,8 @@ app.config['SECRET_KEY'] = 'some secret key'
 
 boostrap = Bootstrap(app)
 
+#----------------------------------------------------#
+
 @app.route('/')
 def index():
     return render_template('Base.html')
@@ -30,3 +32,15 @@ def about():
 @app.route('/courses')
 def courses():
     return render_template('Courses.html')
+
+
+#----------------------------------------------------#
+@app.route('/user/')
+def userindex():
+    return render_template('UserBase.html')
+
+@app.route('/user/dash')
+def userdash():
+    return render_template('UserDash.html')
+
+#============================================#

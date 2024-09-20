@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "ViewBase.html" %}
 {% block head %}{{super()}}
 <link rel="stylesheet" href="{{url_for('static',filename='css/courses.css',external=True)}}">
  {% endblock %}
@@ -6,29 +6,4 @@
 {{ super() }} - Courses{% endblock %}
 {%block navbuttons%}
 {{ super() }}
-<button type="button" class="button" id="About">Login/Sign Up</button>
-{%endblock%}
-
-{%block gridout%}
-<h1 style="text-align: center;text-decoration: underline;"> COURSES </h1>
-{%endblock%}
-
-{% block page_content %}
-{#This part can go in a for loop#}
-    <section class="grid-item item1">
-        <div class="flexi">
-        <img src="../static/images/java.jpg" alt="Java" width="200px">
-        <div>
-        <h4>JAVA master class</h4>
-        <ul style="text-align: left;">
-            <li>Java is simple.</li>
-            <li>Java is robust</li>
-            <li>Java is portable</li>
-            <li>Java is platform independent.</li>
-        </ul>
-        </div>
-        </div>
-        <button class="button-37" role="button">Enquire Now</button><br>
-    </section>
- 
 {%endblock%}
