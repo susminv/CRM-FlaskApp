@@ -31,7 +31,9 @@
     <video autoplay loop muted>
         <source src="../static/videos/bgv3.mp4" type="video/mp4">
     </video>
-
+        {% block gridout %}
+        {#we will fill contents from message.html#}
+        {% endblock  %}
     <article class="grid-container">
         {% block page_content %}
         {#we will fill contents from message.html#}

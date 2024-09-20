@@ -26,3 +26,7 @@ def home():
 @app.route('/about')
 def about():
     return render_template('About Us.html')
+
+@app.route('/courses')
+def courses():
+    return render_template('Courses.html')

@@ -130,7 +130,6 @@ body{
     height: auto;
     min-width: 100%;
     min-height: 100%;
-
     transform: translate(-15%,-15%);
     z-index: -1;
 }
