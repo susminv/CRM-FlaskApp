@@ -1,0 +1,53 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/ADMIN_BASE.css">
+
+{% endblock %}
+
+{% block title %} Title from base template {% endblock %}
+<!--TOP BAR-->
+{% block navbar %}
+  <div class="container-fluid top-bar">
+    
+    
+    
+    <ul class="nav navbar-nav top-bar-content">
+      <li class=""><a href="#"><strong>HOME</strong></a></li>
+      <li><a href="#"><strong>MESSAGES</strong></a></li>
+      <li><a href="#"><strong>NOTIFICATION</strong></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!--SIDE BAR-->
+
+<div class="sidebar">
+  <div class="logo">
+    <a class="navbar-nav" href="#"><img src="static/images/3.png" alt=""></a>
+  </div>
+  <ul class="nav nav-pills nav-stacked sidebar-options">
+    <li><a href="#" class="btn-hover">USERS</a></li>
+    <li><a href="#" class="btn-hover">ENQUIRES</a></li>
+    <li><a href="#" class="btn-hover">QUALIFICATIONS</a></li>
+    <li><a href="#" class="btn-hover">COURSES</a></li>
+  </ul>
+</div>
+
+<!--FOOTER-->
+
+<div class="footer">
+  <div class="button-container">
+    <button type="button"><strong>BACK2TOP</strong></button>
+    <button type="button"><strong>POLICY</strong></button>
+    <button type="button"><strong>HELP</strong></button>
+   
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,23 @@
+.box{
+    margin-top: 30px;
+    border-radius: 20px;
+    width: 200px;
+    height: 180px;
+    background-color:  rgb(57, 62, 65);
+    text-align: center;
+    margin-left: 30px; ;
+    color: rgb(233, 79, 55);
+    align-items: center;
+    
+}
+
+.banners{
+    margin-left:350px;
+    margin-top: 50px;
+    display: flex;}
+
+.chart-container{
+    margin-left: 300px;
+    width: 90%px;
+    height: 300px;
+}
