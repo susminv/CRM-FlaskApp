@@ -94,16 +94,10 @@ body{
     text-decoration: underline;
   }
 
-.grid-container {
-    margin: 25px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 100px);
-    gap: 10px;
-  }
+
 
 .grid-item {
-    background-color:rgb(180, 208, 231,0.8);
+    background-color:rgba(245, 245, 245, 0.6);
     border-radius: 5px;
     box-shadow: 0 4px 12px black;
     padding: 20px;
@@ -113,7 +107,7 @@ body{
   }
 
 .grid-item:hover {
-    background: rgba(240, 255, 240, 0.8);
+    background: rgba(245, 245, 245, 0.6);
     box-shadow: 0 8px 16px black;
     transform: scale(1.05) ; 
     cursor: pointer; 
@@ -124,7 +118,7 @@ body{
 
 .main{
     background-color: transparent;
-    height: 90vh; 
+    min-height: 80vh;
     width: 100vw;
     position: relative;
     overflow: hidden;

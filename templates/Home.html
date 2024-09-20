@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css',external=True)}}">
+ {% endblock %}
+{% block title %}
+{{ super() }} - Home{% endblock %}
+
+{% block page_content %}
+    <section class="grid-item item1">
+        <div id="textCarousel" class="carousel slide" data-ride="carousel" >
+            <div class="carousel-inner" >
+                <div class="item active">
+                    <h2>Welcome to Our Website!</h2><br>
+                    <p>Your satisfaction is our priority.</p>
+                </div>
+                <div class="item">
+                    <h2>Quality Services</h2><br>
+                    <p>We offer a range of services tailored for you.</p>
+                </div>
+                <div class="item">
+                    <h2>Get in Touch</h2><br>
+                    <p>Contact us for more information.</p>
+                </div>
+            </div>
+        
+            <a class="left carousel-control" href="#textCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#textCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    <button class="button-24" role="button">Courses</button><br>
+    </section>
+{%endblock%}
