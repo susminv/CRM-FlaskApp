@@ -13,9 +13,11 @@
     </h1>
 
     <span style="margin-right: 20px;">
+        {% block navbuttons%}
         <button type="button" class="button" id="Home">Home</button>
         <button type="button" class="button" id="About">About Us</button>
-        <button type="button" class="button" id="Contact">Login/Sign Up</button>
+        {%endblock%}
+
     </span>
 
 </nav>

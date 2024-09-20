@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/about.css',external=True)}}">
+ {% endblock %}
+{% block title %}
+{{ super() }} - Home{% endblock %}
+{%block navbuttons%}
+{{ super() }}
+<button type="button" class="button" id="About">Login/Sign Up</button>
+{%endblock%}
+{% block page_content %}
+    <section class="grid-item item1">
+        <h1>
+            About Us
+        </h1>
+        <img src="#" title="Lorem">
+        <div class="para">
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos placeat facere perspiciatis, molestias blanditiis nobis quas debitis similique neque officiis molestiae nam beatae suscipit maiores fuga ab deserunt dolorem quae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis aperiam vitae eligendi blanditiis est rerum? Ratione, necessitatibus! Quia alias eum voluptatum, blanditiis minus a nam hic necessitatibus sequi, corporis enim. Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus sunt explicabo. Earum aliquam libero nihil provident nulla rem voluptate aperiam, illo iusto saepe modi, atque quis debitis quos? Excepturi!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eveniet earum exercitationem perspiciatis consequuntur excepturi et! Cupiditate blanditiis debitis expedita quae ad sunt cum, labore mollitia quisquam laboriosam esse consectetur.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime officiis modi doloribus consequatur ab. Voluptates cumque non quas deleniti corporis, esse provident laudantium quisquam necessitatibus magni deserunt similique quae asperiores!
+        </p>
+        </div>
+    </section>
+{%endblock%}
