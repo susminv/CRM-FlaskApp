@@ -1,0 +1,37 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block title %} ADD USER{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/adduser.css">
+{% endblock %}
+
+
+{% block content %}  
+
+    <h2><strong>ADD NEW USER</strong></h2>
+    <form method="POST" class=" d-flex justify-content align-items-center mn-vh-100">
+        {{ form.hidden_tag() }}
+        {{form.name.label(class="form-label")}}
+        {{form.name(class="form-control")}}
+        
+        {{form.username.label(class="form-label")}}
+        {{form.username(class="form-control")}} 
+        {{form.email.label(class="form-label")}}
+        {{form.email(class="form-control")}}
+        {{form.phone.label(class="form-label")}}
+        {{form.phone(class="form-control")}} 
+        {{form.address.label(class="form-label")}}
+        {{form.address(class="form-control")}} 
+        {{form.gender.label(class="form-label")}}
+        {{form.gender(class="form-control")}}
+        {{form.qualification.label(class="form-label")}}
+        {{form.qualification(class="form-control")}}
+        {{form.yearofgrad.label(class="form-label")}}
+        {{form.yearofgrad(class="form-control")}}
+        <br>
+        {{form.submit_btn(class="btn btn-dark")}}
+    </form>
+
+{% endblock %}

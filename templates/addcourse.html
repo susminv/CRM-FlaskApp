@@ -1,0 +1,32 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block title %} ADD COURSE{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/adduser.css">
+{% endblock %}
+
+
+{% block content %}  
+
+    <h2><strong>ADD NEW COURSE</strong></h2>
+    <form method="POST" class=" d-flex justify-content align-items-center mn-vh-100">
+        {{ form.hidden_tag() }}
+        {{form.coursename.label(class="form-label")}}
+        {{form.coursename(class="form-control")}}
+        
+        {{form.duration.label(class="form-label")}}
+        {{form.duration(class="form-control")}} 
+
+        {{form.fees.label(class="form-label")}}
+        {{form.fees(class="form-control")}}
+
+        {{form.qualificationreq.label(class="form-label")}}
+        {{form.qualificationreq(class="form-control")}} 
+      
+        <br>
+        {{form.submit_btn(class="btn btn-primary")}}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+form{
+    color: rgb(0, 0, 0);
+    margin-top: 30px;
+    margin-left: 40%;
+    width: 300px;
+
+}
+
+.btn{
+    background-color: white;
+    border: 2px solid black;
+    margin-left: 95px;
+
+}
+
+h2{
+    justify-items: center;
+    text-align: center;
+    color: rgb(0, 0, 0);
+
+}

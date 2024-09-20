@@ -1,29 +1,40 @@
 body{
-    background-color: rgb(246, 247, 235) ;
+    background-color: rgb(255, 255, 255) ;
     position: relative;
 }
 a{
     text-decoration: none;
-    color: rgb(233, 79, 55);
+    color: rgb(0, 0, 0);
 }
 
 .top-bar{
+  border: 2px black solid;
+
     position: absolute fixed;
     height: 75px;;
-    background-color: rgb(57, 62, 65);
+    background-color: rgb(255, 255, 255);
     align-items: center;}
 
 .top-bar .top-bar-content > li > a:hover {
-    background-color: #8a8a8a;
+    background-color: #ffffff;
     color: #00ff2a;
     transition: background-color 0.3s, color 0.3s;
     }
 
- .logo img{
+    .top-bar .top-bar-content > li > a > img {
+      height: 25px;
+      width: 25px;
+      }
+  
+
+ .logo  img{
     height:75px;
     width: 75px;
     margin-left: 45px;
-    margin-top: 0px;}
+    margin-top: 0px;
+    padding-top: 0%;
+    margin-bottom: 55px;
+  }
 .top-bar-content {
     position: fixed absolute;
     float: right;
@@ -32,41 +43,49 @@ a{
 }
 
 .sidebar {
+  border: 2px black solid;
     position: absolute fixed;
     height: 100%;
     width: 185px;
     position: fixed;
     top: 0;
     left: 0;
-    background-color:  rgb(57, 62, 65);
+    background-color:  rgb(255, 255, 255);
     padding-top: 20px;
-    align-items: center;
+    align-items: ;
+   
   }
   .sidebar-options li{
-  margin-top: 40px;
-  padding-top: 30px;  }
+    left: 0;
+  margin-top: 55px;
+  padding-top: 15px;  }
 
+  .sidebar-options{
+    margin-top: 20px;
+  }
 
   .sidebar .nav-pills > li > a {
-    padding: 25px 25px;
+    padding: 1px 1px;
     text-decoration: none;
     font-size: 18px;
-    color: rgb(233, 79, 55);
+    color: rgb(0, 0, 0);
     display: block;
   }
   
-  .sidebar .nav-pills > li > a:hover {
+  /*.sidebar .nav-pills > li > a:hover {
     background-color: #8a8a8a;
     color: #00ff2a;
     transition: background-color 0.3s, color 0.3s;
-  }
+  }*/
   
   .footer {
-    background-color: rgb(57, 62, 65);
+    border: 2px black solid;
+
+    background-color: rgb(255, 255, 255);
     width: 100%;
     height: 50px;
     display: flex;
-    position:  absolute;
+    position:   fixed ;
     bottom: 0;
     margin-top: 30px;
     justify-content: flex-end;
@@ -78,10 +97,72 @@ a{
     margin-right: 10px;
   }
   
-  .button-container button {
-    background-color: rgb(57, 62, 65) ;
-    color:  rgb(233, 79, 55);
-    border: none;
-    margin-left: 10px;
+
+.help{
+  margin-left: 350px;
+}
+
+.policy{
+  margin-left: 350px;
+}
+
+
+
+
+/* CSS */
+.button-59 {
+  align-items: center;
+  background-color: #fff;
+  border:0px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 25px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 1px;
+  min-width: 55px;
+  outline: 0;
+  padding: 0 1px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+.button-59:active {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 85px;
   }
-  
+}
+
+label{
+  color: black;
+}
+
+h2{
+  color: black;
+}

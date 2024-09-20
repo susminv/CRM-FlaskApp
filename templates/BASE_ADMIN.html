@@ -13,9 +13,10 @@
     
     
     <ul class="nav navbar-nav top-bar-content">
-      <li class=""><a href="#"><strong>HOME</strong></a></li>
+      <li class=""><a href="/"><strong>HOME</strong></a></li>
       <li><a href="#"><strong>MESSAGES</strong></a></li>
       <li><a href="#"><strong>NOTIFICATION</strong></a></li>
+      <li><a href="#"><img src="static/images/power-23346_1280.png" alt="Log-Out"></a></li>
     </ul>
   </div>
 </nav>
@@ -24,13 +25,13 @@
 
 <div class="sidebar">
   <div class="logo">
-    <a class="navbar-nav" href="#"><img src="static/images/3.png" alt=""></a>
+    <a class="navbar-nav" href="/"><img src="static/images/3.png" alt=""></a>
   </div>
-  <ul class="nav nav-pills nav-stacked sidebar-options">
-    <li><a href="#" class="btn-hover">USERS</a></li>
-    <li><a href="#" class="btn-hover">ENQUIRES</a></li>
-    <li><a href="#" class="btn-hover">QUALIFICATIONS</a></li>
-    <li><a href="#" class="btn-hover">COURSES</a></li>
+  <ul style="list-style-type: none;" class="sidebar-options item1">
+    <li><a href="/listusers" ><button class="button-59" role="button">USER</button></a></li>
+    <li><a href="/listenquires"><button class="button-59" role="button">ENQUIRIES</button></a></li>
+    <li><a href="/listqualification"><button class="button-59" role="button">QUALIFICATIONS</button></a></li>
+    <li><a href="/listcourse"><button class="button-59" role="button">COURSES</button></a></li>
   </ul>
 </div>
 
@@ -38,9 +39,12 @@
 
 <div class="footer">
   <div class="button-container">
-    <button type="button"><strong>BACK2TOP</strong></button>
-    <button type="button"><strong>POLICY</strong></button>
-    <button type="button"><strong>HELP</strong></button>
+    <button class="button-59" role="button">BACK2TOP</button>
+
+    <a href="/policy"><button class="button-59" role="button">POLICY</button>
+    </a>
+    <a href="/help"><button class="button-59" role="button">HELP</button>
+    </a>
    
   </div>
 </div>
