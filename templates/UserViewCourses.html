@@ -1,0 +1,17 @@
+{% extends "ViewBase.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/courses.css',external=True)}}">
+ {% endblock %}
+{% block title %}
+{{ super() }}  Courses{% endblock %}
+{%block navbuttons%}
+<button type="button" class="button" id="Home">Home</button>
+<button type="button" class="button" id="About">About Us</button>
+<button type="button" class="button" id="Logout"> Logout</button>
+{%endblock%}
+
+{%block belowgrid%}
+<div class="back">
+<button class="button-81 backbtn" role="button">Back to Dashboard</button><br>
+</div>
+{%endblock%}

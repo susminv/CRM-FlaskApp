@@ -44,3 +44,6 @@ def userdash():
     return render_template('UserDash.html')
 
 #============================================#
+@app.route('/user/d')
+def userd():
+    return render_template('UserViewCourses.html')
