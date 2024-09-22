@@ -8,26 +8,48 @@
 {% endblock %}
 
 
-{% block content %}  
+{% block content1 %}
 
     <h2><strong>ADD NEW USER</strong></h2>
     <form method="POST" class=" d-flex justify-content align-items-center mn-vh-100">
         {{ form.hidden_tag() }}
-        {{form.name.label(class="form-label")}}
-        {{form.name(class="form-control")}}
+        {{form.firstname.label(class="form-label")}}
+        {{form.firstname(class="form-control")}}
         
+        {{form.lastname.label(class="form-label")}}
+        {{form.lastname(class="form-control")}}
+
+        {{form.password.label(class="form-label")}}
+        {{form.password(class="form-control")}}
+
         {{form.username.label(class="form-label")}}
-        {{form.username(class="form-control")}} 
+        {{form.username(class="form-control")}}
+        
+        {{form.age.label(class="form-label")}}
+        {{form.age(class="form-control")}}
+
         {{form.email.label(class="form-label")}}
         {{form.email(class="form-control")}}
+
+
         {{form.phone.label(class="form-label")}}
         {{form.phone(class="form-control")}} 
+
         {{form.address.label(class="form-label")}}
         {{form.address(class="form-control")}} 
+
         {{form.gender.label(class="form-label")}}
         {{form.gender(class="form-control")}}
+
+        {{form.dob.label(class="form-label")}}
+        {{form.dob(class="form-control")}}
+
         {{form.qualification.label(class="form-label")}}
         {{form.qualification(class="form-control")}}
+
+        {{form.marks.label(class="form-label")}}
+        {{form.marks(class="form-control")}}
+
         {{form.yearofgrad.label(class="form-label")}}
         {{form.yearofgrad(class="form-control")}}
         <br>

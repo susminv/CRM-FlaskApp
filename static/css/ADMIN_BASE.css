@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(255, 255, 255) ;
+    background-color: darkcyan ;
     position: relative;
 }
 a{
@@ -12,12 +12,12 @@ a{
 
     position: absolute fixed;
     height: 75px;;
-    background-color: rgb(255, 255, 255);
+    background-color: darkcyan;
     align-items: center;}
 
 .top-bar .top-bar-content > li > a:hover {
-    background-color: #ffffff;
-    color: #00ff2a;
+    background-color:darkcyan;
+    color: rgb(255, 255, 255);
     transition: background-color 0.3s, color 0.3s;
     }
 
@@ -50,18 +50,19 @@ a{
     position: fixed;
     top: 0;
     left: 0;
-    background-color:  rgb(255, 255, 255);
+    background-color:  darkcyan;
     padding-top: 20px;
     align-items: ;
    
   }
   .sidebar-options li{
-    left: 0;
+  left: 0;
   margin-top: 55px;
   padding-top: 15px;  }
 
   .sidebar-options{
     margin-top: 20px;
+    padding-left: 0px;
   }
 
   .sidebar .nav-pills > li > a {
@@ -81,15 +82,16 @@ a{
   .footer {
     border: 2px black solid;
 
-    background-color: rgb(255, 255, 255);
+    background-color: darkcyan;
     width: 100%;
     height: 50px;
     display: flex;
-    position:   fixed ;
-    bottom: 0;
-    margin-top: 30px;
+    position: relative ;
+    bottom: 1px;
+    margin-top: 110px;
     justify-content: flex-end;
     align-items: center;
+    min-height: 10vh;
     
   }
   
@@ -111,8 +113,9 @@ a{
 
 /* CSS */
 .button-59 {
+  
   align-items: center;
-  background-color: #fff;
+  background-color:darkcyan;
   border:0px solid #000;
   box-sizing: border-box;
   color: #000;
@@ -122,13 +125,14 @@ a{
   font-family: Inter,sans-serif;
   font-size: 16px;
   font-weight: 600;
-  height: 25px;
+  height: 55px;
   justify-content: center;
   letter-spacing: -.8px;
   line-height: 1px;
-  min-width: 55px;
+  /*min-width: 55px;*/
+  width: 182px;
   outline: 0;
-  padding: 0 1px;
+  padding: 0px 0px;
   text-align: center;
   text-decoration: none;
   transition: all .3s;
@@ -142,8 +146,8 @@ a{
 }
 
 .button-59:hover {
-  border-color: #06f;
-  color: #06f;
+  background-color: darkblue;
+  color: rgb(255, 255, 255);
   fill: #06f;
 }
 
@@ -166,3 +170,16 @@ label{
 h2{
   color: black;
 }
+
+.footer .button-container > a:hover {
+  height: 30px;
+  background-color: darkcyan;
+  color: rgb(255, 255, 255);
+  transition: background-color 0.3s, color 0.3s;
+  }
+
+  .footer .button-container > a {
+    text-decoration: none;
+    padding: 15px;
+    height: 5px;
+    }

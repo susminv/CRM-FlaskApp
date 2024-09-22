@@ -9,9 +9,7 @@
 <!--TOP BAR-->
 {% block navbar %}
   <div class="container-fluid top-bar">
-    
-    
-    
+     
     <ul class="nav navbar-nav top-bar-content">
       <li class=""><a href="/"><strong>HOME</strong></a></li>
       <li><a href="#"><strong>MESSAGES</strong></a></li>
@@ -20,6 +18,21 @@
     </ul>
   </div>
 </nav>
+
+
+{% block content1 %}
+{% endblock %}
+
+<!--FOOTER-->
+
+<div class="footer">
+  <div class="button-container">
+    <a href="#top"><strong>BACK2TOP</strong></a>
+    <a href="/policy"><strong>POLICY</strong></a>
+    <a href="/help"><strong>HELP</strong></a>
+   
+  </div>
+</div>
 
 <!--SIDE BAR-->
 
@@ -34,22 +47,6 @@
     <li><a href="/listcourse"><button class="button-59" role="button">COURSES</button></a></li>
   </ul>
 </div>
-
-<!--FOOTER-->
-
-<div class="footer">
-  <div class="button-container">
-    <button class="button-59" role="button">BACK2TOP</button>
-
-    <a href="/policy"><button class="button-59" role="button">POLICY</button>
-    </a>
-    <a href="/help"><button class="button-59" role="button">HELP</button>
-    </a>
-   
-  </div>
-</div>
-
-
 {% endblock %}
 
 

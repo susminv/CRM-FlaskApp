@@ -5,24 +5,45 @@
     border: 5px black solid;
     width: 325px;
     height: 325px;
-    background-color:  rgb(255, 255, 255);
+    background-color:  rgb(0, 134, 101);
     text-align: center;
     margin-left: 30px; ;
     color: rgb(0, 0, 0);
     align-items: center;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 10px 10px 5px #414141;
     transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.text-body-primary{
+    color: rgb(0, 0, 0);
+}
+
+.box:hover .text-body-primary{
+    color: rgb(255, 255, 255);
+}
+.box h4{
+    margin-top: 40px;
+font-size: x-large;
+}
+
+.card-body{
+margin-top: 30px;
+}
+
+.box button{
+    width: 200px ;
+    margin-top: 40px;
 }
 
 
 .box:hover {
-    background-color: rgb(104, 103, 103);
-    color: rgb(0, 0, 0);
-    transform: scale(1.1);
+    background-color: darkblue;
+    color: white;
+    transform: scale(1.05);
   }
 
 
-h2{ margin-left: 40%;
+h2{ margin-left: 50%;
     display: flex;
 }
 
@@ -32,7 +53,7 @@ h2{ margin-left: 40%;
     display: flex;}
 
 .chart-container{
-    margin-left: 300px;
+    margin-left: 50%;
     width: 900px;
     height: 300px;
 }

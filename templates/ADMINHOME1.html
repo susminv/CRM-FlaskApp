@@ -11,7 +11,7 @@
 
 {% endblock %}
 
-{% block content %}
+{% block content1 %}
 
 <h2><strong>WELCOME ADMIN!!</strong></h2>
 <div class="banners">
@@ -21,14 +21,11 @@
         <h4 class="my-0 fw-normal"><strong>TOTAL USERS</strong></h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">2399<small class="text-body-primary ">users</small></h1>
-        
-
-       
+        <h1 class="card-title pricing-card-title">2399 <br><small class="text-body-primary ">users</small></h1>
       </div>
     </div>
     <a href="/listusers"> <button type="button" class="w-100 btn btn-lg btn-outline-primary banner-options">LIST USERS</button></a>
-  </div>
+</div>
 
   <div class="col box">
     <div class="card mb-4 rounded-3 shadow-sm">
@@ -36,7 +33,7 @@
         <h4 class="my-0 fw-normal"><strong>TOTAL ENQUIREIS</strong></h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">34<small class="text-body-primary ">enquires</small></h1>
+        <h1 class="card-title pricing-card-title">34 <br><small class="text-body-primary ">enquires</small></h1>
         
 
         <a href="/listenquires"><button type="button" class="w-100 btn btn-lg btn-outline-primary banner-options">LIST ENQUIRES</button></a>
@@ -50,7 +47,7 @@
         <h4 class="my-0 fw-normal"><strong>NEW USERS</strong></h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">29<small class="text-body-primary ">new users</small></h1>
+        <h1 class="card-title pricing-card-title">29 <br><small class="text-body-primary ">new users</small></h1>
         
 
         <a href="/adduser"><button type="button" class="w-100 btn btn-lg btn-outline-primary banner-options">ADD USER</button></a>
@@ -60,8 +57,9 @@
     
 
 </div>
-<!---->
-<!--PIE CHART
+
+<!--
+PIE CHART
 <div class="chart-container">
     <canvas id="myPieChart"></canvas>
 </div>
@@ -92,5 +90,5 @@
     });
 </script>
 
--->
+
 {% endblock %}
