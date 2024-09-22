@@ -1,0 +1,20 @@
+{% extends "UserBase.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/delete.css',external=True)}}">
+
+ {% endblock %}
+{% block title %}
+{{ super() }} Profile{% endblock %}
+
+{%block contents%}
+<div class="dell">
+<h2 class="text-warning">Are you sure you want to delete your profile?</h2>
+<br><br>
+<span>
+    <a href="#" class="text-danger">Yes</a>
+    <a href="#" class="text-success">No</a>
+</span>
+</div>
+
+
+{%endblock%}

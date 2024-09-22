@@ -1,11 +1,50 @@
 {% extends "UserBase.html" %}
 {% block head %}{{super()}}
-<link rel="stylesheet" href="{{url_for('static',filename='css/userdash.css',external=True)}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/userprofile.css',external=True)}}">
+
  {% endblock %}
 {% block title %}
 {{ super() }} Profile{% endblock %}
 
 {%block contents%}
-
+<h3>PROFILE</h3>
+<table class="details">
+    <tr>
+        <td>First Name</td>
+        <td>John</td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td>Doe</td>
+    </tr>
+    <tr>
+        <td>Date of Birth</td>
+        <td>1990-01-01</td>
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td>Male</td>
+    </tr>
+    <tr>
+        <td>Email ID</td>
+        <td>john.doe@example.com</td>
+    </tr>
+    <tr>
+        <td>Phone</td>
+        <td>123-456-7890</td>
+    </tr>
+    <tr>
+        <td>State</td>
+        <td>California</td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td>Los Angeles</td>
+    </tr>
+    <tr>
+        <td>Qualifications</td>
+        <td>Diploma, Bachelors</td>
+    </tr>
+</table>
 
 {%endblock%}

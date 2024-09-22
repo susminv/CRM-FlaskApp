@@ -7,8 +7,18 @@
   }
 
 .item1{
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 300px;
+    margin-right: 300px;
     grid-column: span 3;
-    grid-row: span 8;
+    grid-row: span 4;
+}
+
+.item1:hover{
+  transform: scale(0.99);
+}
+
+.form{
+  margin-left: 50px;
+  margin-right: 50px;
+  text-align: left;
 }

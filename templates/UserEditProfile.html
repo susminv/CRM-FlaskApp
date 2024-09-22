@@ -1,0 +1,110 @@
+{% extends "UserBase.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/UserEdit.css',external=True)}}">
+ {% endblock %}
+{% block title %}
+{{ super() }} Edit Profile{% endblock %}
+
+{%block contents%}
+{%block formhead%}
+<h3 style="font-weight: bold;">EDIT PROFILE</h3><br>
+{%endblock%}
+<form method="POST" action="{{ url_for('register') }}" class="edit">
+    {{ form.hidden_tag() }} 
+
+    <div class="mb-3 form">
+        <label for="firstname" class="form-label">{{ form.firstname.label }}</label>
+        {{ form.firstname(class="form-control") }}
+        {% if form.firstname.errors %}
+            <div class="text-danger">{{ form.firstname.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="lastname" class="form-label">{{ form.lastname.label }}</label>
+        {{ form.lastname(class="form-control") }}
+        {% if form.lastname.errors %}
+            <div class="text-danger">{{ form.lastname.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="birthday" class="form-label">{{ form.birthday.label }}</label>
+        {{ form.birthday(class="form-control") }}
+        {% if form.birthday.errors %}
+            <div class="text-danger">{{ form.birthday.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="gender" class="form-label">{{ form.gender.label }}</label>
+        {{ form.gender(class="form-select") }}
+        {% if form.gender.errors %}
+            <div class="text-danger">{{ form.gender.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="email" class="form-label">{{ form.email.label }}</label>
+        {{ form.email(class="form-control") }}
+        {% if form.email.errors %}
+            <div class="text-danger">{{ form.email.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="phone" class="form-label">{{ form.phone.label }}</label>
+        {{ form.phone(class="form-control") }}
+        {% if form.phone.errors %}
+            <div class="text-danger">{{ form.phone.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="state" class="form-label">{{ form.state.label }}</label>
+        {{ form.state(class="form-control") }}
+        {% if form.state.errors %}
+            <div class="text-danger">{{ form.state.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="city" class="form-label">{{ form.city.label }}</label>
+        {{ form.city(class="form-control") }}
+        {% if form.city.errors %}
+            <div class="text-danger">{{ form.city.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="qualifications" class="form-label">{{ form.qualifications.label }}</label>
+        {{ form.qualifications(class="form-check-input") }}
+        {% if form.qualifications.errors %}
+            <div class="text-danger">{{ form.qualifications.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="password" class="form-label">{{ form.password.label }}</label>
+        {{ form.password(class="form-control") }}
+        {% if form.password.errors %}
+            <div class="text-danger">{{ form.password.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+
+    <div class="mb-3 form">
+        <label for="confirmpassword" class="form-label">{{ form.confirmpassword.label }}</label>
+        {{ form.confirmpassword(class="form-control") }}
+        {% if form.confirmpassword.errors %}
+            <div class="text-danger">{{ form.confirmpassword.errors[0] }}</div>
+        {% endif %}
+    </div><br>
+    
+
+    <button type="submit" class="btn btn-primary">Update details</button>
+
+</form>
+{%endblock%}
+{%block space%}
+   <br>
+{%endblock%}

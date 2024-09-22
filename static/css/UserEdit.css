@@ -1,0 +1,19 @@
+.item2{
+    margin-left: 50px;
+    margin-right: 100px;
+    grid-column: span 3;
+    grid-row: span 4;
+    grid-column: span 5;
+    height: 150vh;
+}
+
+.item2:hover{
+  transform: scale(0.99);
+}
+
+.form{
+  margin-left: 50px;
+  margin-right: 50px;
+  text-align: left;
+}
+
