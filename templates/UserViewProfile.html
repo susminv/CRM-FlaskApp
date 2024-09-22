@@ -1,0 +1,11 @@
+{% extends "UserBase.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/userdash.css',external=True)}}">
+ {% endblock %}
+{% block title %}
+{{ super() }} Profile{% endblock %}
+
+{%block contents%}
+
+
+{%endblock%}

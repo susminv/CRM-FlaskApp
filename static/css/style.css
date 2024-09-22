@@ -118,7 +118,7 @@ body{
 
 .main{
     background-color: transparent;
-    min-height: 80vh;
+    min-height: 75vh;
     width: 100vw;
     position: relative;
     overflow: hidden;

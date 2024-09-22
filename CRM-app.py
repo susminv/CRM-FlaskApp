@@ -15,7 +15,13 @@ app.config['SECRET_KEY'] = 'some secret key'
 
 boostrap = Bootstrap(app)
 
-#----------------------------------------------------#
+#-----------------------------------------------------------------------------------------------------#
+
+#---------CLASSES----->
+
+#-----------------------------------------------------------------------------------------------------#
+
+#============================================# Pre Login #============================================#
 
 @app.route('/')
 def index():
@@ -33,8 +39,14 @@ def about():
 def courses():
     return render_template('Courses.html')
 
+#============================================# Login or Sign Up options #============================================#
 
-#----------------------------------------------------#
+@app.route('/login')
+def login():
+    return render_template('Login.html') # login page
+
+#============================================# User #============================================#
+
 @app.route('/user/')
 def userindex():
     return render_template('UserBase.html')
@@ -43,7 +55,35 @@ def userindex():
 def userdash():
     return render_template('UserDash.html')
 
-#============================================#
-@app.route('/user/d')
-def userd():
-    return render_template('UserViewCourses.html')
+#============================================# User Profile options #============================================#
+
+
+@app.route('/user/profile')
+def uprofile():
+    return render_template('UserViewProfile.html') # view user profile
+
+@app.route('/user/edit')
+def uedit():
+    return render_template('UserEditProfile.html') # Edit user profile
+
+@app.route('/user/delete') #delete user, and go to pre-login home page
+def udel():
+    pass
+
+
+#============================================# User Enquiry options #============================================#
+
+
+@app.route('/user/courses')
+def ucourses():
+    return render_template('UserViewCourses.html') # view courses                     
+
+@app.route('/user/enquire')
+def uenquire():
+    return render_template('UserEnquire.html') # enquire about a course
+
+@app.route('/user/viewenquiries')
+def uviewenq():
+    return render_template('UserViewEnq.html') # view user enquiries
+
+
