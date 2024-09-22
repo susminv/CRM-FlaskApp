@@ -1,0 +1,41 @@
+{% extends "UserBase.html" %}
+{% block head %}{{super()}}
+<link rel="stylesheet" href="{{url_for('static',filename='css/user_enq_list.css',external=True)}}">
+ {% endblock %}
+{% block title %}
+{{ super() }} Enquiries list{% endblock %}
+
+{%block contents%}
+ <h1>Your Enquiries</h1><br>
+ <table class="table table-striped table-hover">
+    <tr class="head">
+        <th>Enquiry ID</th>
+        <th>Course ID</th>
+        <th>Message</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>13</td>
+        <td>The end of the world is inevitable no?
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>11</td>
+        <td>How long are you going to do this?</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>13</td>
+        <td>The end of the world is inevitable no?
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>11</td>
+        <td>How long are you going to do this?</td>
+    </tr>
+
+
+</table>
+{%endblock%}

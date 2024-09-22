@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap 
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, SelectMultipleField, SubmitField, widgets, TextAreaField
+from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, SelectMultipleField, SubmitField, widgets, TextAreaField,IntegerField
 from wtforms.validators import DataRequired, Email, Length, EqualTo,Regexp
 from config import Config  # Make sure to import your Config class
 from flask_login import login_user, LoginManager, logout_user, current_user, login_required
@@ -28,8 +28,6 @@ class RegistrationForm(FlaskForm):
     phone = StringField('Phone Number', validators=[DataRequired()])
     state = StringField('State of Domicile', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
-    
-    # Multiple qualifications as checkboxes
     qualifications = SelectMultipleField(
         'Qualifications',
         choices=[('10th','10th'),('12th', '12th'), ('Bachelors', 'Bachelors'), ('Masters', 'Masters')],
@@ -46,12 +44,17 @@ class RegistrationForm(FlaskForm):
     confirmpassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
     
-#WTForms for login
+
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators = [DataRequired()])
     submit = SubmitField('Login')
 
+class EnquiryForm(FlaskForm):
+    userid = IntegerField('User ID',validators=[DataRequired()])
+    courseid = IntegerField('Course ID',validators=[DataRequired()])
+    message = TextAreaField('Your message', validators=[DataRequired()])
+    submit = SubmitField('Enquire')
 
 
 #============================================# Pre Login #============================================#
@@ -120,7 +123,8 @@ def ucourses():
 
 @app.route('/user/enquire')
 def uenquire():
-    return render_template('UserEnquire.html') # enquire about a course
+    form = EnquiryForm()
+    return render_template('UserEnquire.html',form=form) # enquire about a course
 
 @app.route('/user/viewenquiries')
 def uviewenq():

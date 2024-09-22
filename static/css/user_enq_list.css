@@ -1,0 +1,13 @@
+.head th{
+    text-align: center;
+    background-color: rgb(51, 51, 51);
+    color: aliceblue;
+}
+
+.msg{
+    text-align: left;
+}
+
+.item2:hover{
+    transform: scale(0.99);
+}
