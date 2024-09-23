@@ -224,7 +224,7 @@ def addenquiry():
     #form.course.choices = [(course.id, course.name) for course in Course.query.all()]
 
     if form.validate_on_submit():
-        coursename=form.coursenmae.data
+        coursename=form.coursename.data
         userid=form.userid.data
         message=form.message.data
         status=form.status.data
