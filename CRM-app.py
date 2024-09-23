@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap 
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, SelectMultipleField, SubmitField, widgets, TextAreaField,IntegerField
+from wtforms import StringField, DateField, EmailField, SelectField, PasswordField, RadioField, SubmitField, widgets, TextAreaField,IntegerField
 from wtforms.validators import DataRequired, Email, Length, EqualTo,Regexp
 from config import Config  # Make sure to import your Config class
 from flask_login import login_user, LoginManager, logout_user, current_user, login_required
@@ -28,13 +28,10 @@ class RegistrationForm(FlaskForm):
     phone = StringField('Phone Number', validators=[DataRequired()])
     state = StringField('State of Domicile', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
-    qualifications = SelectMultipleField(
-        'Qualifications',
+    qualifications = RadioField(
+        'Highest Qualification',
         choices=[('10th','10th'),('12th', '12th'), ('Bachelors', 'Bachelors'), ('Masters', 'Masters')],
-        option_widget=widgets.CheckboxInput(),
-        widget=widgets.ListWidget(prefix_label=False)
     )
-    
     password = PasswordField('Password', validators=[
         DataRequired(),
         Length(min=8, max=20),
@@ -131,3 +128,6 @@ def uviewenq():
     return render_template('UserViewEnq.html') # view user enquiries
 
 
+@app.route('/user/test')
+def u():
+    return render_template('ViewBase.html') # view user enquiries

@@ -106,3 +106,21 @@
     padding: 1rem 2rem;
   }
 }
+  
+.main{
+  background-color: transparent;
+  min-height: 75vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.main video{
+  position: fixed;
+  width: 400vw;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-15%,-15%);
+  z-index: -1;
+}
