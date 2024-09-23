@@ -13,10 +13,55 @@ from datetime import datetime, timezone
 
 app = Flask(__name__) 
 app.config.from_object('config.Config')
+mydb_obj = SQLAlchemy(app)
+migrate = Migrate(app,mydb_obj)
 
 boostrap = Bootstrap(app)
 
 #---------Database------------#
+
+#USER Table
+class Users(mydb_obj.Model):
+    __tablename__ = 'users'  # Explicitly define the table name
+
+    id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
+    username = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+    firstname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
+    lastname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
+    password = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+
+    email = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+    phone_number = mydb_obj.Column(mydb_obj.Integer, unique=True, nullable=False)
+    address = mydb_obj.Column(mydb_obj.String(200), unique=True, nullable=False)
+    date_of_birth = mydb_obj.Column(mydb_obj.Date, nullable=False)  # Date of birth
+    highest_qualificationid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
+    marks = mydb_obj.Column(mydb_obj.Integer, nullable=False)
+    yearofgraduation =  mydb_obj.Column(mydb_obj.Integer, nullable=False)
+
+#QUALIFICATIONS Table
+class Qualifications(mydb_obj.Model):
+    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
+    qualification_name = mydb_obj.Column(mydb_obj.String(150))
+
+#COURSE Table
+class Courses(mydb_obj.Model):
+    courseid = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
+    coursename= mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+    description= mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+    course_duration = mydb_obj.Column(mydb_obj.Integer, nullable=False)  # Duration in hours
+    fees = mydb_obj.Column(mydb_obj.Integer, nullable=False)
+    qualification_id = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
+
+#ENQUIRIES Table
+class Enquiries(mydb_obj.Model):
+
+    enqid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
+    userid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('users.id'),nullable=False)
+    courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
+    message =  mydb_obj.Column(mydb_obj.String(150))
+    enquiry_date =  mydb_obj.Column(mydb_obj.DateTime, default=datetime.now) 
+    status = mydb_obj.Column(mydb_obj.Integer,nullable=False) #FK
+    resource = mydb_obj.Column(mydb_obj.Integer, nullable=False) #FK
 
 #---------Form classes--------#
 class RegistrationForm(FlaskForm):
