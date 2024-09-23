@@ -26,94 +26,104 @@ app.config.from_object('config.Config')#loading the configuration from the confi
 mydb_obj = SQLAlchemy(app) #create an SQLAlchemy object
 migrate=Migrate(app,mydb_obj)
 
-class Qualifications(mydb_obj.Model):
-    __tablename__ = 'qualifications'
-    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
-    qualification_name = mydb_obj.Column(mydb_obj.String(150))
-    courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
-
-
-    users = mydb_obj.relationship('user', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
-    courses = mydb_obj.relationship('Courses',backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
-    #user = mydb_obj.relationship('User', back_populates='qualifications', uselist=False)  # One-to-one relationship with Enquiries
-
 #USER Table
 class User(mydb_obj.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'  # Explicitly define the table name
+
     id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
     username = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
     password = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
     firstname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
     lastname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
-    gender=mydb_obj.Column(mydb_obj.String(10),nullable=False)
-    age = mydb_obj.Column(mydb_obj.Integer,nullable=False) 
     email = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
     phone_number = mydb_obj.Column(mydb_obj.Integer, unique=True, nullable=False)
+    age = mydb_obj.Column(mydb_obj.Integer, unique=True, nullable=False)
+    gender = mydb_obj.Column(mydb_obj.String(5), unique=True, nullable=False)
+
     address = mydb_obj.Column(mydb_obj.String(200), unique=True, nullable=False)
     date_of_birth = mydb_obj.Column(mydb_obj.Date, nullable=False)  # Date of birth
     highest_qualificationid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
-
-
     marks = mydb_obj.Column(mydb_obj.Integer, nullable=False)
     yearofgraduation =  mydb_obj.Column(mydb_obj.Integer, nullable=False)
-    #enquiries = mydb_obj.relationship('Enquiries', backref='user', uselist=False)  # One-to-one relationship with Enquiries
-
-class CourseModules(mydb_obj.Model):
-    __tablename__ = 'coursemodules'
-    moduleid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
-    modulename = mydb_obj.Column(mydb_obj.String(150))
-    courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #Foreignkey
-
-    coursess = mydb_obj.relationship('Courses', backref='coursemodules')  # One-to-many relationship with Courses
+    #qualification = mydb_obj.relationship('Qualifications', backref='user', uselist=False)  # One-to-one relationship with Enquiries
+    enquiry=mydb_obj.relationship('Enquiries',backref='user',uselist=False)
 
 
 #COURSE Table
 class Courses(mydb_obj.Model):
-    __tablename__ = 'courses'
     courseid = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
     coursename= mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
     description= mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
     course_duration = mydb_obj.Column(mydb_obj.Integer, nullable=False)  # Duration in hours
     fees = mydb_obj.Column(mydb_obj.Integer, nullable=False)
+
+    #enquiries= mydb_obj.relationship('Enquiries', backref='courses', uselist=False)  # One-to-one relationship with courses
+
+
     qualification_id = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
-    moduleid= mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('coursemodules.moduleid'),nullable=False) #Foreignkey
-    #courses = mydb_obj.relationship('Courses', backref='user')
+    moduleid= mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('coursemodules.modulesid'),nullable=False) #Foreignkey
+    enquiry_id =  mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('enquiries.enqid'),nullable=False) #Foreignkey
 
-    enquiriess= mydb_obj.relationship('Enquiries', backref='courses', uselist=False)  # One-to-one relationship with courses
-    #qualifications = mydb_obj.relationship('qualifications', backref='courses', uselist=False)  # One-to-one relationship with Enquiries
-    #coursemodules = mydb_obj.relationship('courseModules', backref='courses', uselist=False)  # One-to-one relationship with Enquiries
-
-
-#Resources Table
-class Resources(mydb_obj.Model):
-    __tablename__ = 'resources'
-    resourceid = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #PK
-    resourcename = mydb_obj.Column(mydb_obj.String(150))
-    enquiriess = mydb_obj.relationship('Enquiries', backref='resources', uselist=False)  # One-to-one relationship with Enquiries
-
-#Enquiry Status Table
-class EnquiryStatus(mydb_obj.Model):
-    __tablename__ = 'enquirystatus'
-    enquirys_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #PK
-    enquiry_status =  mydb_obj.Column(mydb_obj.Integer)
-    enquiries = mydb_obj.relationship('Enquiries', backref='enquirystatus', uselist=False)  # One-to-one relationship with Enquiries
-
+    #user = mydb_obj.relationship('User', backref='courses', uselist=False)  # One-to-one relationship with Enquiries
+    #coursemodules = mydb_obj.relationship('CourseModules', backref='courses', uselist=False)  # One-to-one relationship with Enquiries
 class Enquiries(mydb_obj.Model):
-    __tablename__ = 'enquiries'
+    
     enqid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
-    userid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('users.id'),nullable=False)
-    courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
+    userid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('user.id'),nullable=False)
+    #courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
 
     enquiry_date =  mydb_obj.Column(mydb_obj.DateTime, default=datetime.now) 
     message =  mydb_obj.Column(mydb_obj.String(150))
     statusid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('enquirystatus.enquirys_id'),nullable=False) #FK
-    resource = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('resources.resourceid'),nullable=False) #FK
+    resourceid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('resources.resourceid'),nullable=False) #FK
+
+    #resources = mydb_obj.relationship('Resources', backref='enquiries', uselist=False)
+    #courses = mydb_obj.relationship('Courses', backref='enquiries', uselist=False)  # One-to-one relationship with Enquiries
+    #enquirystatus = mydb_obj.relationship('EnquiryStatus', backref='enquiries', uselist=False)  # One-to-one relationship with Enquiries
+    
+
+
+
+class Qualifications(mydb_obj.Model):
+    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
+    qualification_name = mydb_obj.Column(mydb_obj.String(150))
+    #courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
+
+
+
+    #user = mydb_obj.relationship('User', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
+    courses = mydb_obj.relationship('Courses', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
+    user = mydb_obj.relationship('User', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
+
+
+
+class CourseModules(mydb_obj.Model):
+    __tablename__ = 'coursemodules'  # Explicitly define the table name
+    modulesid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
+    modulename = mydb_obj.Column(mydb_obj.String(150))
+    #courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #Foreignkey
+
+    courses = mydb_obj.relationship('Courses', backref='coursemodules')  # One-to-many relationship with Courses
 
 
 
 
+#Enquiry Status Table
+class EnquiryStatus(mydb_obj.Model):
+    __tablename__ = 'enquirystatus'  # Explicitly define the table name
+
+    enquirys_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #PK
+    enquiry_status =  mydb_obj.Column(mydb_obj.Integer)
+
+    enquiries = mydb_obj.relationship('Enquiries', backref='enquirystatus', uselist=False)  # One-to-one relationship with Enquiries
 
 
+#Resources Table
+class Resources(mydb_obj.Model):
+    resourceid = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #PK
+    resourcename = mydb_obj.Column(mydb_obj.String(150))
+
+    enquiries = mydb_obj.relationship('Enquiries', backref='resources')  # One-to-one relationship with Enquiries
 
 
 
@@ -179,6 +189,7 @@ def adduser():
         marks=form.marks.data
         qualification=form.qualification.data
         yearofgrad=form.yearofgrad.data
+        dob=form.dob.data
 
         user=User(firstname=firstname,lastname=lastname,age=age,email=email,password=password,username=username,phone_number=phone,address=address,gender=gender,highest_qualificationid=qualification,marks=marks,yearofgraduation=yearofgrad,date_of_birth=dob)
         mydb_obj.session.add(user)

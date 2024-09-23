@@ -38,7 +38,7 @@
             <tbody>
             {% for user in all_user %}
               <tr>
-                <th scope="row">{{employee.id}}</th>
+                <th scope="row">{{user.id}}</th>
                 <td>{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.username}}</td>
@@ -47,11 +47,11 @@
                 <td>{{user.address}}</td>
                 <td>{{user.gender}}</td>
                 <td>{{user.date_of_birth}}</td>
-                <td>{{user.highest_qualification}}</td>
+                <td>{{user.highest_qualificationid}}</td>
                 <td>{{user.marks}}</td>
                 <td>{{user.yearofgraduation}}</td>
 
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/edituser/{{user.id}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteuser/{{contact.id}}">DELETE</a></button></td>
+                <td style="text-align: center;"><button class="btn btn-warning"><a href="/edituser/{{user.id}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteuser/{{user.id}}">DELETE</a></button></td>
                 
               </tr>
             {% endfor %}
