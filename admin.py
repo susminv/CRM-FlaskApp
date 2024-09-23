@@ -12,11 +12,12 @@ from flask import session
 from flask_wtf.file import FileField
 from werkzeug.utils import secure_filename
 from flask_bootstrap import Bootstrap
-from flask import flash
+from flask import flash,request
 from flask_login import LoginManager,login_user,UserMixin
 from flask_login import current_user,logout_user,login_required
 from email_validator import validate_email, EmailNotValidError
 from datetime import datetime
+from wtforms_sqlalchemy.fields import QuerySelectField
 
 app=Flask(__name__)
 bootstrap=Bootstrap(app)
@@ -32,22 +33,21 @@ class User(mydb_obj.Model):
 
     id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
     username = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
-    password = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+    password = mydb_obj.Column(mydb_obj.String(150), unique=False, nullable=False)
     firstname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
     lastname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
     email = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
-    phone_number = mydb_obj.Column(mydb_obj.Integer, unique=True, nullable=False)
-    age = mydb_obj.Column(mydb_obj.Integer, unique=True, nullable=False)
-    gender = mydb_obj.Column(mydb_obj.String(5), unique=True, nullable=False)
-
-    address = mydb_obj.Column(mydb_obj.String(200), unique=True, nullable=False)
+    phone_number = mydb_obj.Column(mydb_obj.Integer, unique=False, nullable=False)
+    age = mydb_obj.Column(mydb_obj.Integer, unique=False, nullable=False)
+    gender = mydb_obj.Column(mydb_obj.String(101), unique=False, nullable=False)
+    address = mydb_obj.Column(mydb_obj.String(200), unique=False, nullable=False)
     date_of_birth = mydb_obj.Column(mydb_obj.Date, nullable=False)  # Date of birth
-    highest_qualificationid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
+    highest_qualification = mydb_obj.Column(mydb_obj.String(150),nullable=False) 
     marks = mydb_obj.Column(mydb_obj.Integer, nullable=False)
-    yearofgraduation =  mydb_obj.Column(mydb_obj.Integer, nullable=False)
-    #qualification = mydb_obj.relationship('Qualifications', backref='user', uselist=False)  # One-to-one relationship with Enquiries
-    enquiry=mydb_obj.relationship('Enquiries',backref='user',uselist=False)
+    yearofgraduation =  mydb_obj.Column(mydb_obj.Integer, nullable=False)  
+    role_user = mydb_obj.Column(mydb_obj.String(10), unique=False, nullable=False,default='user1')
 
+    enquiry=mydb_obj.relationship('Enquiries',backref='user',uselist=False)
 
 #COURSE Table
 class Courses(mydb_obj.Model):
@@ -57,73 +57,24 @@ class Courses(mydb_obj.Model):
     course_duration = mydb_obj.Column(mydb_obj.Integer, nullable=False)  # Duration in hours
     fees = mydb_obj.Column(mydb_obj.Integer, nullable=False)
 
-    #enquiries= mydb_obj.relationship('Enquiries', backref='courses', uselist=False)  # One-to-one relationship with courses
-
-
-    qualification_id = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
-    moduleid= mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('coursemodules.modulesid'),nullable=False) #Foreignkey
-    enquiry_id =  mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('enquiries.enqid'),nullable=False) #Foreignkey
-
-    #user = mydb_obj.relationship('User', backref='courses', uselist=False)  # One-to-one relationship with Enquiries
-    #coursemodules = mydb_obj.relationship('CourseModules', backref='courses', uselist=False)  # One-to-one relationship with Enquiries
+    qualification = mydb_obj.Column(mydb_obj.String(150),nullable=False) #FK
+  
+   
 class Enquiries(mydb_obj.Model):
     
     enqid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
     userid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('user.id'),nullable=False)
-    #courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
-
+    course = mydb_obj.Column(mydb_obj.String(100)) #FK
     enquiry_date =  mydb_obj.Column(mydb_obj.DateTime, default=datetime.now) 
     message =  mydb_obj.Column(mydb_obj.String(150))
-    statusid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('enquirystatus.enquirys_id'),nullable=False) #FK
-    resourceid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('resources.resourceid'),nullable=False) #FK
-
-    #resources = mydb_obj.relationship('Resources', backref='enquiries', uselist=False)
-    #courses = mydb_obj.relationship('Courses', backref='enquiries', uselist=False)  # One-to-one relationship with Enquiries
-    #enquirystatus = mydb_obj.relationship('EnquiryStatus', backref='enquiries', uselist=False)  # One-to-one relationship with Enquiries
+    status = mydb_obj.Column(mydb_obj.String(150),nullable=False,default='pending') #FK
+    resource = mydb_obj.Column(mydb_obj.String(150),nullable=False) #FK
     
 
 
-
 class Qualifications(mydb_obj.Model):
-    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
+    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
     qualification_name = mydb_obj.Column(mydb_obj.String(150))
-    #courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
-
-
-
-    #user = mydb_obj.relationship('User', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
-    courses = mydb_obj.relationship('Courses', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
-    user = mydb_obj.relationship('User', backref='qualifications', uselist=False)  # One-to-one relationship with Enquiries
-
-
-
-class CourseModules(mydb_obj.Model):
-    __tablename__ = 'coursemodules'  # Explicitly define the table name
-    modulesid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
-    modulename = mydb_obj.Column(mydb_obj.String(150))
-    #courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #Foreignkey
-
-    courses = mydb_obj.relationship('Courses', backref='coursemodules')  # One-to-many relationship with Courses
-
-
-
-
-#Enquiry Status Table
-class EnquiryStatus(mydb_obj.Model):
-    __tablename__ = 'enquirystatus'  # Explicitly define the table name
-
-    enquirys_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #PK
-    enquiry_status =  mydb_obj.Column(mydb_obj.Integer)
-
-    enquiries = mydb_obj.relationship('Enquiries', backref='enquirystatus', uselist=False)  # One-to-one relationship with Enquiries
-
-
-#Resources Table
-class Resources(mydb_obj.Model):
-    resourceid = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #PK
-    resourcename = mydb_obj.Column(mydb_obj.String(150))
-
-    enquiries = mydb_obj.relationship('Enquiries', backref='resources')  # One-to-one relationship with Enquiries
 
 
 
@@ -137,20 +88,27 @@ class addform(FlaskForm):
     age=IntegerField(' Age:',validators=[DataRequired()])
     email=StringField(' Email:',validators=[DataRequired(),Email()])
     address=StringField(' Adress:')
-    gender=SelectField(' Gender:',choices=[('Male','Male'),('Female','Female')])
+    gender=SelectField('Gender:',choices=[('Male','Male'),('Female','Female')])
     phone=FloatField('Number',validators=[DataRequired()])
     dob = DateField('Date of Birth:', validators=[DataRequired()])
-    qualification=StringField(' Qualification:',validators=[DataRequired()])
+    qualification = SelectField('Whats your qualification',choices=[],validators=[DataRequired()])
     marks=IntegerField('Marks(%):',validators=[DataRequired()])
     yearofgrad=StringField(' Year of Graduation:',validators=[DataRequired()])
     submit_btn=SubmitField('SUBMIT')
 
 
 
+
+
+
 @app.route('/')
 def index():
+    user_count = User.query.count()
+    enquiry_count = Enquiries.query.count()
+    course_count = Courses.query.count()
+
     mydb_obj.create_all()
-    return render_template('ADMINHOME1.html')
+    return render_template('ADMINHOME1.html',user_count=user_count,enquiry_count=enquiry_count,course_count=course_count)
 
 @app.route('/help')
 def help():
@@ -176,6 +134,7 @@ def adduser():
     yearofgrad=None
     dob=None
     form=addform()
+    form.qualification.choices=[(c.qualification_name) for c in Qualifications.query.all()]
     if form.validate_on_submit():
         firstname=form.firstname.data
         lastname=form.lastname.data
@@ -191,7 +150,7 @@ def adduser():
         yearofgrad=form.yearofgrad.data
         dob=form.dob.data
 
-        user=User(firstname=firstname,lastname=lastname,age=age,email=email,password=password,username=username,phone_number=phone,address=address,gender=gender,highest_qualificationid=qualification,marks=marks,yearofgraduation=yearofgrad,date_of_birth=dob)
+        user=User(firstname=firstname,lastname=lastname,age=age,email=email,password=password,username=username,phone_number=phone,address=address,gender=gender,highest_qualification=qualification,marks=marks,yearofgraduation=yearofgrad,date_of_birth=dob)
         mydb_obj.session.add(user)
         mydb_obj.session.commit()
 
@@ -205,13 +164,62 @@ def listusers():
     #return render_template('listusers.html')
     return render_template('listusers.html',all_user=User.query.all())
 
+@app.route('/edituser/<id>',methods=['GET','POST'])
+def edit(id):
+    user=User.query.get_or_404(id)
+    form=addform(obj=user)
+    form.qualification.choices=[(c.qualification_name) for c in Qualifications.query.all()]
 
+    if form.validate_on_submit():
+        user.firstname=form.firstname.data
+        user.lastname=form.lastname.data
+        user.password=form.password.data
+        user.username=form.username.data
+        user.age=form.age.data
+        user.phone=form.phone.data
+        user.email=form.email.data
+        user.address=form.address.data
+        user.gender=form.gender.data
+        user.marks=form.marks.data
+        user.qualification=form.qualification.data
+        user.yearofgrad=form.yearofgrad.data
+        user.dob=form.dob.data
+
+        mydb_obj.session.commit()    
+
+        return redirect(url_for('listusers'))
+    elif request.method=='GET':
+        form.firstname.data=user.firstname
+        form.lastname.data=user.lastname
+        form.password.data=user.password
+        form.username.data=user.username
+        form.age.data=user.age
+        form.phone.data=user.phone_number
+        form.email.data=user.email
+        form.address.data=user.address
+        form.gender.data=user.gender
+        form.marks.data=user.marks
+        form.qualification.data=user.highest_qualification
+        form.yearofgrad.data=user.yearofgraduation
+        form.dob.data=user.date_of_birth
+        mydb_obj.session.commit()
+
+
+    return render_template('edituser.html',form=form)
+
+@app.route('/deleteuser/<id>',methods=['GET','POST'])
+def delete(id):
+    user=User.query.get_or_404(id)
+    mydb_obj.session.delete(user)
+    mydb_obj.session.commit()
+    return redirect(url_for('listusers'))
 
 class addenquiryform(FlaskForm):
-    coursename=SelectField('course:',coerce=str)
-    userid=StringField('User ID:',validators=[DataRequired()])
-    message=StringField('Username:')
-    status=SelectField(' Status:',choices=[('Accepted','Pending','Closed'),('Accepted','Pending','Closed')])
+    coursename = SelectField('Course to Enquire',choices=[],validators=[DataRequired()])
+    userid=SelectField('UserID of Enquirer:',choices=[],validators=[DataRequired()])
+    message=StringField('Message:')
+    status=SelectField('Status:',choices=[('Accepted','Accepted'),('Closed','Closed'),('Pending','Pending')],default='Pending')
+    resource=SelectField('Where did you find us:',choices=[('SOCIAL MEDIA','SOCIAL MEDIA'),('FRIEEND/RELATIVE','FRIEEND/RELATIVE'),('GOOGLE SEARCH','GOOGLE SEARCH')],default='GOOGLE SEARCH')
     submit_btn=SubmitField('SUBMIT')
 
 @app.route('/addenquiry',methods=['GET','POST'])
@@ -220,30 +228,76 @@ def addenquiry():
     userid=None
     message=None
     status=None
+    resource=None
     form=addenquiryform()
-    #form.course.choices = [(course.id, course.name) for course in Course.query.all()]
+    form.coursename.choices = [(course.coursename) for course in Courses.query.all()]
+    form.userid.choices=[(c.id) for c in User.query.all()]
 
     if form.validate_on_submit():
         coursename=form.coursename.data
         userid=form.userid.data
         message=form.message.data
         status=form.status.data
+        resource=form.resource.data
 
-        return redirect(url_for('listenquires'))
+        enquiry=Enquiries(course=coursename,userid=userid,message=message,status=status,resource=resource)
+        mydb_obj.session.add(enquiry)
+        mydb_obj.session.commit()
+
+
+        return redirect(url_for('listenquiries'))
     return render_template('addenquiry.html',form=form)
 
 
 
-@app.route('/listenquires')
-def listenquires():
-    return render_template('listenquires.html')
+@app.route('/listenquiries')
+def listenquiries():
+    return render_template('listenquires.html',all_enquiry=Enquiries.query.all())
+
+
+@app.route('/editenquiry/<id>',methods=['GET','POST'])
+def editenquiry(id):
+    enquiries=Enquiries.query.get_or_404(id)
+    form=addenquiryform(obj=enquiries)
+    form.coursename.choices = [(course.coursename) for course in Courses.query.all()]
+    form.userid.choices=[(c.id) for c in User.query.all()]
+
+    if form.validate_on_submit():
+        enquiries.coursename=form.coursename.data
+        enquiries.userid=form.userid.data
+        enquiries.message=form.message.data
+        enquiries.status=form.status.data
+        enquiries.resource=form.resource.data
+
+        mydb_obj.session.commit()    
+
+        return redirect(url_for('listenquiries'))
+    elif request.method=='GET':
+        form.coursename.data=enquiries.course
+        form.userid.data=enquiries.userid
+        form.message.data=enquiries.message
+        form.status.data=enquiries.status
+        form.resource.data=enquiries.resource
+        mydb_obj.session.commit()
+
+
+    return render_template('editenquiry.html',form=form)
+
+@app.route('/deleteenquiry/<id>',methods=['GET','POST'])
+def deleteenquiry(id):
+    enquiry=Enquiries.query.get_or_404(id)
+    mydb_obj.session.delete(enquiry)
+    mydb_obj.session.commit()
+    return redirect(url_for('listenquiries'))
+
 
 
 class addcourseform(FlaskForm):
     coursename=StringField('Course Name:',validators=[DataRequired()])
     duration=IntegerField('Duration(Hours):',validators=[DataRequired()])
+    description=StringField(' Description:',validators=[DataRequired()])
     fees=IntegerField(' Fees:',validators=[DataRequired()])
-    qualificationreq=StringField(' Qualification required:',validators=[DataRequired()])
+    qualification = SelectField('Qualification Required:',choices=[],validators=[DataRequired()])
     submit_btn=SubmitField('SUBMIT')
 
 
@@ -251,16 +305,22 @@ class addcourseform(FlaskForm):
 def addcourse():
     coursename=None
     duration=None
+    description=None
     fees=None
-    qualificationreq=None
+    qualification=None
     form=addcourseform()
+    form.qualification.choices=[(c.qualification_name) for c in Qualifications.query.all()]
     
 
     if form.validate_on_submit():
         coursename=form.coursename.data
         duration=form.duration.data
         fees=form.fees.data
-        qualificationreq=form.qualificationreq.data
+        qualification=form.qualification.data
+        description=form.description.data
+        course=Courses(coursename=coursename,description=description,course_duration=duration,fees=fees,qualification=qualification)
+        mydb_obj.session.add(course)
+        mydb_obj.session.commit()
 
         return redirect(url_for('listcourse'))
     return render_template('addcourse.html',form=form)
@@ -268,8 +328,41 @@ def addcourse():
 
 @app.route('/listcourse')
 def listcourse():
-    return render_template('listcourse.html')
+    return render_template('listcourse.html',all_courses=Courses.query.all())
 
+@app.route('/editcourse/<id>',methods=['GET','POST'])
+def editcourse(id):
+    course=Courses.query.get_or_404(id)
+    form=addcourseform(obj=course)
+    form.qualification.choices=[(c.qualification_name) for c in Qualifications.query.all()]   
+
+    if form.validate_on_submit():
+        course.coursename=form.coursename.data
+        course.description=form.description.data
+        course.course_duration=form.duration.data
+        course.fees=form.fees.data
+        course.qualification=form.qualification.data
+
+        mydb_obj.session.commit()    
+
+        return redirect(url_for('listcourse'))
+    elif request.method=='GET':
+        form.coursename.data=course.coursename
+        form.description.data=course.description
+        form.duration.data=course.course_duration
+        form.fees.data=course.fees
+        form.qualification.data=course.qualification
+        mydb_obj.session.commit()
+
+
+    return render_template('editcourse.html',form=form)
+
+@app.route('/deletecourse/<id>',methods=['GET','POST'])
+def deletecourse(id):
+    course=Courses.query.get_or_404(id)
+    mydb_obj.session.delete(course)
+    mydb_obj.session.commit()
+    return redirect(url_for('listcourse'))
 
 class addqualificationform(FlaskForm):
     qualificationname=StringField('Qualification Name:',validators=[DataRequired()])
@@ -280,12 +373,21 @@ def addqualification():
     qualificationname=None
     form=addqualificationform()
     
-
     if form.validate_on_submit():
-        qualificationname=form.qualificationname.data
+        qualification_name=form.qualificationname.data
+        qualification=Qualifications(qualification_name=qualificationname)
+        mydb_obj.session.add(qualification)
+        mydb_obj.session.commit()
         return redirect(url_for('listqualification'))
     return render_template('addqualification.html',form=form)
 
 @app.route('/listqualification')
 def listqualification():
-    return render_template('listqualification.html')
+    return render_template('listqualification.html',all_qualification=Qualifications.query.all())
+
+@app.route('/deletequalification/<id>',methods=['GET','POST'])
+def deletequalification(id):
+    qualification=Qualifications.query.get_or_404(id)
+    mydb_obj.session.delete(qualification)
+    mydb_obj.session.commit()
+    return redirect(url_for('listqualification'))

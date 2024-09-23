@@ -1,7 +1,7 @@
 {% extends "BASE_ADMIN.html"%}
 {% import "bootstrap/wtf.html" as wtf%}
 
-{% block title %} ADD COURSE{% endblock %}
+{% block title %} EDIT COURSE{% endblock %}
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="static/css/adduser.css">
@@ -10,7 +10,7 @@
 
 {% block content1 %}  
 
-    <h2><strong>ADD NEW COURSE</strong></h2>
+    <h2><strong>EDIT COURSE</strong></h2>
     <form method="POST" class=" d-flex justify-content align-items-center mn-vh-100">
         {{ form.hidden_tag() }}
         {{form.coursename.label(class="form-label")}}

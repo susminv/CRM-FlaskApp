@@ -22,25 +22,25 @@
             <th scope="col">COURSE</th>
             <th scope="col">TIME</th>
             <th scope="col">MESSAGE</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">RESOURCE</th>
             <th scope="col">OPTIONS </th>
-            
-
 
             </tr>
         </thead>
             <tbody class="row-gx-3">
-            {% for employee in all_employees %}
+            {% for enquiry in all_enquiry %}
               <tr>
-                <th scope="row">{{employee.id}}</th>
-                <td>{{employee.name}}</td>
-                <td>{{employee.salary}}</td>
-                <td>{{employee.age}}</td>
-                <td>{{employee.email}}</td>
-                <td>{{employee.profile.address}}</td>
+                <td>{{enquiry.enqid}}</td>
+                <td>{{enquiry.userid}}</td>
+                <td>{{enquiry.course}}</td>
+                <td>{{enquiry.DATETIME}}</td>
+                <td>{{enquiry.message}}</td>
+                <td>{{enquiry.status}}</td>
+                <td>{{enquiry.resource}}</td>
 
-                <td>{{employee.profile.gender}}</td>
 
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/edituser/{{user.id}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteuser/{{contact.id}}">DELETE</a></button></td>
+                <td style="text-align: center;"><button class="btn btn-warning"><a href="/editenquiry/{{enquiry.enqid}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteenquiry/{{enquiry.enqid}}">DELETE</a></button></td>
                 
               </tr>
             {% endfor %}

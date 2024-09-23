@@ -19,6 +19,8 @@
             <tr>
             <th scope="col">COURSE-ID</th>
             <th scope="col">COURSE NAME</th>
+            <th scope="col">DESCRIPTION</th>
+
             <th scope="col">DURATION(H)</th>
             <th scope="col">FEES</th>
             <th scope="col">QUALIFICATION</th>
@@ -28,18 +30,15 @@
             </tr>
         </thead>
             <tbody>
-            {% for employee in all_employees %}
+            {% for course in all_courses %}
               <tr>
-                <th scope="row">{{employee.id}}</th>
-                <td>{{employee.name}}</td>
-                <td>{{employee.salary}}</td>
-                <td>{{employee.age}}</td>
-                <td>{{employee.email}}</td>
-                <td>{{employee.profile.address}}</td>
-
-                <td>{{employee.profile.gender}}</td>
-
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/edituser/{{user.id}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteuser/{{contact.id}}">DELETE</a></button></td>
+                <th scope="row">{{course.courseid}}</th>
+                <td>{{course.coursename}}</td>
+                <td>{{course.description}}</td>
+                <td>{{course.course_duration}}</td>
+                <td>{{course.fees}}</td>
+                <td>{{course.qualification}}</td>
+                <td style="text-align: center;"><button class="btn btn-warning"><a href="/editcourse/{{course.courseid}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deletecourse/{{course.courseid}}">DELETE</a></button></td>
                 
               </tr>
             {% endfor %}

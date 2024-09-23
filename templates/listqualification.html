@@ -22,18 +22,11 @@
             </tr>
         </thead>
             <tbody>
-            {% for employee in all_employees %}
+            {% for qualification in all_qualification %}
               <tr>
-                <th scope="row">{{employee.id}}</th>
-                <td>{{employee.name}}</td>
-                <td>{{employee.salary}}</td>
-                <td>{{employee.age}}</td>
-                <td>{{employee.email}}</td>
-                <td>{{employee.profile.address}}</td>
-
-                <td>{{employee.profile.gender}}</td>
-
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/edituser/{{user.id}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteuser/{{contact.id}}">DELETE</a></button></td>
+                <th scope="row">{{qualification.qualification_id}}</th>
+                <td>{{qualification.qualification_name}}</td>
+                <td style="text-align: center;"><button class="btn btn-warning"><a href="/deletequalification/{{qualification.qualification_id}}">DELETE</a></button></td>
                 
               </tr>
             {% endfor %}
