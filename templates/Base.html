@@ -14,9 +14,9 @@
 
     <span style="margin-right: 40px;">
         {% block navbuttons%}
-        <button type="button" class="button" id="Home">Home</button>
-        <button type="button" class="button" id="About">About Us</button>
-        <button type="button" class="button" id="About">Login/Sign Up</button>
+        <a href="/home"><button type="button" class="button" id="Home">Home</button></a>
+        <a href="/about"><button type="button" class="button" id="About">About Us</button></a>
+        <a href="/login"><button type="button" class="button" id="About">Login/Sign Up</button></a>
         {%endblock%}
 
     </span>
@@ -31,7 +31,7 @@
 <main class="main">
 <div class="back">
     <video autoplay loop muted>
-        <source src="../static/videos/bgv3.mp4" type="video/mp4">
+        <source src="../static/videos/bgv3.mp4" type="video/mp4"> 
     </video>
 </div>
         {% block gridout %}

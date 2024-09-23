@@ -139,3 +139,7 @@ body{
     top: 0;
     z-index: -10;
 }
+
+.bttn{
+    text-decoration: none;
+}

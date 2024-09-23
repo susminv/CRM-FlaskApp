@@ -8,8 +8,9 @@
   }
 
 .item1{
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 75px;
+    margin-right: 75px;
+    height: 60vh;
     grid-column: span 3;
     grid-row: span 8;
 }

@@ -5,9 +5,9 @@
 {% block title %}
 {{ super() }} - User{% endblock %}
 {%block navbuttons%}
-<button type="button" class="button" id="Home">Home</button>
-<button type="button" class="button" id="About">About Us</button>
-<button type="button" class="button" id="Logout"> Logout</button>
+<a href="/user/dash"><button type="button" class="button" id="Home">Home</button></a>
+<a href="/user/about"><button type="button" class="button" id="About">About Us</button></a>
+<a href="/home"><button type="button" class="button" id="About">Logout</button></a>
 {%endblock%}
 
 {%block gridout%}
@@ -26,9 +26,9 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="#">View</a></li>
-                        <li><a href="#">Edit</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="/user/profile">View</a></li>
+                        <li><a href="/user/edit">Edit</a></li>
+                        <li><a href="/user/delete">Delete</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="#">View</a></li>
+                        <li><a href="/user/viewenquiries">View</a></li>
                     </ul>
                 </div>
             </div>

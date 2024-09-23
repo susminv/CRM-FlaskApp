@@ -51,6 +51,10 @@ class EnquiryForm(FlaskForm):
     userid = IntegerField('User ID',validators=[DataRequired()])
     courseid = IntegerField('Course ID',validators=[DataRequired()])
     message = TextAreaField('Your message', validators=[DataRequired()])
+    resource = SelectField(
+        'Resource',
+        choices=[('1','nil'),('2','Acquaintances'),('3', 'Social Media'), ('4', 'Staff')]
+    )
     submit = SubmitField('Enquire')
 
 
@@ -93,6 +97,10 @@ def userindex():
 @app.route('/user/dash')
 def userdash():
     return render_template('UserDash.html')
+
+@app.route('/user/about')
+def userabout():
+    return render_template('UserAboutUs.html')
 
 #============================================# User Profile options #============================================#
 

@@ -34,6 +34,16 @@
         {% endif %}
     </div>
     <br>
+    <br>
+    <div class="mb-3 form">
+        <label for="resource" class="form-label">{{ form.resource.label }} :</label>
+        {{ form.resource(class="form-check-input") }}
+        {% if form.resource.errors %}
+            <div class="text-danger">{{ form.resource.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <br>
+    
     <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
 </form>
 {%endblock%}

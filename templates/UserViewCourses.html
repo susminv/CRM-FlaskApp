@@ -5,13 +5,10 @@
 {% block title %}
 {{ super() }}  Courses{% endblock %}
 {%block navbuttons%}
-<button type="button" class="button" id="Home">Home</button>
-<button type="button" class="button" id="About">About Us</button>
-<button type="button" class="button" id="Logout"> Logout</button>
+<a href="/user/dash"><button type="button" class="button" id="Home">Home</button></a>
+<a href="#"><button type="button" class="button" id="About">About Us</button></a>
+<a href="/home"><button type="button" class="button" id="About">Logout</button></a>
 {%endblock%}
-
-{%block belowgrid%}
-<div class="back">
-<button class="button-81 backbtn" role="button">Back to Dashboard</button><br>
-</div>
+{%block enquire%}
+<a href="/user/enquire"><button class="button-37" role="button">Enquire Now</button></a><br>
 {%endblock%}

@@ -117,7 +117,8 @@
 
 .main video{
   position: fixed;
-  width: 400vw;
+  left: 0;
+  width: 120vw;
   height: auto;
   min-width: 100%;
   min-height: 100%;
