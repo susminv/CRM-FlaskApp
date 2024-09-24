@@ -15,7 +15,7 @@
         <form method="POST" action="{{ url_for('login') }}">
             {{ form.hidden_tag() }}
     
-            <div class="mb-3 form">
+            <div class="mb-3 form"> 
                 <label for="email" class="form-label">{{ form.email.label }} :</label>
                 {{ form.email(class="form-control") }}
                 {% if form.email.errors %}
