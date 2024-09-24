@@ -1,0 +1,48 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/listusers.css">
+  <head>
+{% endblock %}
+
+{% block title %} HELP{% endblock %}
+
+
+{% block content1 %}  
+<div class="container mt-5 help">
+  <h1 class="text-center mb-4"><strong>ADMIN HELP PAGE</strong></h1>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Managing Courses</h3>
+    </div>
+    <div class="panel-body">
+      <p><strong>Adding a New Course:</strong> Go to 'Courses' and click 'Add New Course'. Fill in the details and click 'Submit'.</p>
+      <p><strong>Editing a Course:</strong> Click 'Edit' next to the course, make changes, and click 'Save'.</p>
+      <p><strong>Deleting a Course:</strong> Click 'Delete' next to the course and confirm the deletion.</p>
+    </div>
+  </div>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title">Managing Users</h3>
+    </div>
+    <div class="panel-body">
+      <p><strong>Adding a New User:</strong> Go to 'Users' and click 'Add New User'. Fill in the details and click 'Submit'.</p>
+      <p><strong>Editing a User:</strong> Click 'Edit' next to the user, make changes, and click 'Save'.</p>
+      <p><strong>Deleting a User:</strong> Click 'Delete' next to the user and confirm the deletion.</p>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Viewing Enquiries</h3>
+    </div>
+    <div class="panel-body">
+      <p><strong>Viewing Enquiries:</strong> Go to 'Enquiries'. You can filter by date, course, or user.</p>
+      <p><strong>Responding to Enquiries:</strong> Click on an enquiry to see details and respond if needed.</p>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

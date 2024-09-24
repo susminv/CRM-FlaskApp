@@ -1,0 +1,40 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/listusers.css">
+  <head>
+{% endblock %}
+
+{% block title %}  LIST OF QUALIFICATIONS{% endblock %}
+
+
+
+{% block content1 %}  
+
+<div class="container">
+    <table class="table table-bordered p-3 mb-3">
+        <thead>
+            <tr>
+            <th scope="col">QUA-ID</th>
+            <th scope="col">QUALIFICATION NAME</th>
+            <th scope="col">OPTIONS</th>
+            </tr>
+        </thead>
+            <tbody>
+            {% for qualification in all_qualification %}
+              <tr>
+                <th scope="row">{{qualification.qualification_id}}</th>
+                <td style="justify-content: center;">{{qualification.qualification_name}}</td>
+                <td style="justify-content: center;"><button class="btn"><a href="/deletequalification/{{qualification.qualification_id}}">DELETE</a></button></td>
+                
+              </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+          <a href="/addqualification"><button class="btn-lg btn-block button-33" role="button">ADD QUALIFICATION</button></a>
+
+    </div>
+{% endblock %}

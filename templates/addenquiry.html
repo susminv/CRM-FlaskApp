@@ -1,0 +1,35 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block title %} ADD ENQUIRY{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/adduser.css">
+{% endblock %}
+
+
+{% block content1 %}  
+
+    <h2><strong>ADD NEW ENQUIRY</strong></h2>
+    <form method="POST" class=" d-flex justify-content align-items-center mn-vh-100">
+        {{ form.hidden_tag() }}
+        {{form.coursename.label(class="form-label")}}
+        {{form.coursename(class="form-control")}}
+        
+        {{form.userid.label(class="form-label")}}
+        {{form.userid(class="form-control")}} 
+
+        {{form.message.label(class="form-label")}}
+        {{form.message(class="form-control")}}
+
+        {{form.status.label(class="form-label")}}
+        {{form.status(class="form-control")}} 
+
+        {{form.resource.label(class="form-label")}}
+        {{form.resource(class="form-control")}} 
+      
+        <br>
+        {{form.submit_btn(class="btn btn-primary")}}
+    </form>
+
+{% endblock %}

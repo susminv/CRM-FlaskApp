@@ -1,0 +1,54 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/ADMIN_BASE.css">
+
+{% endblock %}
+
+{% block title %} Title from base template {% endblock %}
+<!--TOP BAR-->
+{% block navbar %}
+  <div class="container-fluid top-bar">
+     
+    <ul class="nav navbar-nav top-bar-content">
+      <li class=""><a href="/"><strong>HOME</strong></a></li>
+      <!-- <li><a href="#"><strong>MESSAGES</strong></a></li>
+      <li><a href="#"><strong>NOTIFICATION</strong></a></li> -->
+      <li><a href="#"><img src="{{url_for('static',filename='images/power-23346_1280.png')}}" alt="Log-Out"></a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="all-content">
+{% block content1 %}
+{% endblock %}
+</div>
+<!--FOOTER-->
+
+<div class="footer">
+  <div class="button-container">
+    <a href="#top"><strong>BACK2TOP</strong></a>
+    <a href="/policy"><strong>POLICY</strong></a>
+    <a href="/help"><strong>HELP</strong></a>
+   
+  </div>
+</div>
+
+<!--SIDE BAR-->
+
+<div class="sidebar">
+  <div class="logo">
+    <a class="navbar-nav" href="/"><img src="{{url_for('static',filename='images/3.png')}}" alt=""></a>
+  </div>
+  <ul style="list-style-type: none;" class="sidebar-options item1">
+    <li><a href="/listusers" ><button class="button-59" role="button">USER</button></a></li>
+    <li><a href="/listenquiries"><button class="button-59" role="button">ENQUIRIES</button></a></li>
+    <li><a href="/listqualification"><button class="button-59" role="button">QUALIFICATIONS</button></a></li>
+    <li><a href="/listcourse"><button class="button-59" role="button">COURSES</button></a></li>
+  </ul>
+</div>
+{% endblock %}
+
+
+
+

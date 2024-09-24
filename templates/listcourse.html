@@ -1,0 +1,53 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/listusers.css">
+  <head>
+{% endblock %}
+
+{% block title %}  LIST OF COURSES{% endblock %}
+
+
+
+{% block content1 %}  
+
+<div class="container">
+    <table class="table table-bordered p-3 mb-3">
+        <thead>
+            <tr>
+            <th scope="col">COURSE-ID</th>
+            <th scope="col">COURSE NAME</th>
+            <th scope="col">DESCRIPTION</th>
+
+            <th scope="col">DURATION(H)</th>
+            <th scope="col">FEES</th>
+            <th scope="col">QUALIFICATION</th>
+            <th scope="col" colspan="2" style="text-align: center;">OPTIONS </th>
+      
+
+            </tr>
+        </thead>
+            <tbody>
+            {% for course in all_courses %}
+              <tr>
+                <th scope="row">{{course.courseid}}</th>
+                <td>{{course.coursename}}</td>
+                <td>{{course.description}}</td>
+                <td>{{course.course_duration}}</td>
+                <td>{{course.fees}}</td>
+                <td>{{course.qualification}}</td>
+                <td style="text-align: center;"><button class="btn"><a href="/editcourse/{{course.courseid}}">EDIT</a></button></td>
+                <td style="text-align: center;"><button class="btn"><a href="/deletecourse/{{course.courseid}}">DELETE</a></button></td>
+                
+              </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+          <a href="/addcourse"><button class="btn-lg btn-block button-33" role="button">ADD COURSE</button></a>
+
+
+    </div>
+{% endblock %}

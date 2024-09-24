@@ -1,0 +1,67 @@
+{% extends "BASE_ADMIN.html"%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="static/css/listusers.css">
+  <head>
+{% endblock %}
+
+{% block title %}  LIST OF USERS{% endblock %}
+
+
+
+{% block content1 %}  
+
+<div class="container">
+    <table class="table  table-bordered thead-light border p-3 mb-3">
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FIRSTNAME</th>
+            <th scope="col">LASTNAME</th>
+            <th scope="col">USERNAME</th>
+            <th scope="col">AGE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">GENDER</th>
+            <th scope="col">DOB</th>
+            <th scope="col">QUALI.</th>
+            <th scope="col">MARKS</th>
+            <th scope="col">YEAR OF GRAD.</th>
+            <th scope="col" colspan="2" style="text-align: center;">OPTIONS </th>
+            
+
+
+            </tr>
+        </thead>
+            <tbody>
+            {% for user in all_user %}
+              <tr>
+                <td scope="row">{{user.id}}</td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.date_of_birth}}</td>
+                <td>{{user.highest_qualification}}</td>
+                <td>{{user.marks}}</td>
+                <td>{{user.yearofgraduation}}</td>
+
+                <td style="text-align: center;"><button class="btn "><a href="/edituser/{{user.id}}">EDIT</a></button></td>
+                <td><button class="btn"><a href="/deleteuser/{{user.id}}">DELETE</a></button></td></td>
+                
+              </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+          <a href="/adduser"><button class="btn-lg btn-block button-33" role="button">ADD USER</button></a>
+
+
+    </div>
+{% endblock %}
+
