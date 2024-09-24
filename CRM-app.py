@@ -10,6 +10,7 @@ from flask_login import login_user, LoginManager, logout_user, current_user, log
 from flask_login import UserMixin
 from flask import session
 from datetime import datetime, timezone
+from flask_login import LoginManager,login_user, logout_user, current_user, login_required, UserMixin
 
 app = Flask(__name__) 
 app.config.from_object('config.Config')
@@ -17,20 +18,17 @@ mydb_obj = SQLAlchemy(app)
 migrate = Migrate(app,mydb_obj)
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-#User loader for Flask-Login
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+
 
 boostrap = Bootstrap(app)
 
 #---------Database------------#
 
 #USER Table
-class User(mydb_obj.Model):
+class User(mydb_obj.Model, UserMixin):
     __tablename__ = 'user'  # Explicitly define the table name
 
     id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
@@ -76,6 +74,9 @@ class Enquiries(mydb_obj.Model):
 class Qualifications(mydb_obj.Model):
     qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
     qualification_name = mydb_obj.Column(mydb_obj.String(150))
+
+
+
 
 #---------Form classes--------#
 class RegistrationForm(FlaskForm):
@@ -133,10 +134,45 @@ def courses():
 
 #============================================# Login or Sign Up options #============================================#
 
+
+#User loader for Flask-Login
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        print(user.role_user)
+        print(user.email)
+        print(user.password)
+        print(form.password.data)
+
+        if user and user.password == form.password.data:
+            print(user.role_user)
+            print(user.email)
+            login_user(user, remember=False)
+            if user.role_user == 'user1':
+                return redirect(url_for('uprofile',id=user.id))
+            else:
+                print("Admin working")
+                print(user.role_user)
+                print(user.email)
+                return redirect(url_for('index2'))
+        else:
+            flash("Incorrect credentials")
+            
+        
+        
     return render_template('Login.html',form=form) # login page
+
+@app.context_processor
+def inject_user():
+    return dict(current_user=current_user)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -177,8 +213,12 @@ def register():
 
         flash(f'Data recieved')
 
-        return redirect(url_for('userdash'))
+        return redirect(url_for('login'))
     return render_template('Register.html',form=form) # login page
+
+
+
+
 
 #============================================# User #============================================#
 
@@ -199,7 +239,7 @@ def userabout():
 
 @app.route('/user/profile/<id>')
 def uprofile(id):
-    return render_template('UserViewProfile.html',userprofile=User.query.get_or_404(id)) # view user profile
+    return render_template('UserViewProfile.html',userprofile=User.query.get_or_404(id),n=current_user.id) # view user profile
 
 @app.route('/user/edit/<id>', methods=['GET', 'POST'])
 def uedit(id):
@@ -616,3 +656,12 @@ def deletequalification(id):
     mydb_obj.session.delete(qualification)
     mydb_obj.session.commit()
     return redirect(url_for('listqualification'))
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out', 'success')
+    session.clear()
+    return redirect(url_for('login'))

@@ -7,7 +7,7 @@
 {%block navbuttons%}
 <a href="/user/dash"><button type="button" class="button" id="Home">Home</button></a>
 <a href="/user/about"><button type="button" class="button" id="About">About Us</button></a>
-<a href="/home"><button type="button" class="button" id="About">Logout</button></a>
+<a href="/logout"><button type="button" class="button" id="About">Logout</button></a>
 {%endblock%}
 
 {%block gridout%}
@@ -26,9 +26,9 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="/user/profile">View</a></li>
-                        <li><a href="/user/edit">Edit</a></li>
-                        <li><a href="/user/delete">Delete</a></li>
+                        <li><a href="/user/profile/{{ current_user.id }}">View</a></li>
+                        <li><a href="/user/edit/{{ current_user.id }}">Edit</a></li>
+                        <li><a href="/user/delete/{{ current_user.id }}">Delete</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <li><a href="/user/viewenquiries">View</a></li>
+                        <li><a href="/user/viewenquiries/{{ current_user.id }}">View</a></li>
                     </ul>
                 </div>
             </div>
