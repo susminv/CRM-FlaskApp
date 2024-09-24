@@ -1,11 +1,13 @@
 form{
-    color: rgb(0, 0, 0);
+    color: #ffffff;
     margin-top: 30px;
     margin-left: 40%;
     width: 500px;
 
 }
-
+form label{
+    color: #ffb53e;
+}
 .btn{
     background-color:darkblue;
     border: 2px solid black;
@@ -21,6 +23,6 @@ form{
 h2{
     justify-items: center;
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: #ffb53e;
 
 }

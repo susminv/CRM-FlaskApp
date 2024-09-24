@@ -12,17 +12,17 @@
      
     <ul class="nav navbar-nav top-bar-content">
       <li class=""><a href="/"><strong>HOME</strong></a></li>
-      <li><a href="#"><strong>MESSAGES</strong></a></li>
-      <li><a href="#"><strong>NOTIFICATION</strong></a></li>
-      <li><a href="#"><img src="static/images/power-23346_1280.png" alt="Log-Out"></a></li>
+      <!-- <li><a href="#"><strong>MESSAGES</strong></a></li>
+      <li><a href="#"><strong>NOTIFICATION</strong></a></li> -->
+      <li><a href="#"><img src="{{url_for('static',filename='images/power-23346_1280.png')}}" alt="Log-Out"></a></li>
     </ul>
   </div>
 </nav>
 
-
+<div class="all-content">
 {% block content1 %}
 {% endblock %}
-
+</div>
 <!--FOOTER-->
 
 <div class="footer">
@@ -38,7 +38,7 @@
 
 <div class="sidebar">
   <div class="logo">
-    <a class="navbar-nav" href="/"><img src="static/images/3.png" alt=""></a>
+    <a class="navbar-nav" href="/"><img src="{{url_for('static',filename='images/3.png')}}" alt=""></a>
   </div>
   <ul style="list-style-type: none;" class="sidebar-options item1">
     <li><a href="/listusers" ><button class="button-59" role="button">USER</button></a></li>

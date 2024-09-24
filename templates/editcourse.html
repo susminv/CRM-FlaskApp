@@ -4,13 +4,14 @@
 {% block title %} EDIT COURSE{% endblock %}
 {% block head %}
   {{ super() }}
-  <link rel="stylesheet" href="static/css/adduser.css">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/adduser.css')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/ADMIN_BASE.css')}}">
 {% endblock %}
 
 
 {% block content1 %}  
 
-    <h2><strong>EDIT COURSE</strong></h2>
+    <h2 style="color: #ffb53e;"><strong>EDIT COURSE</strong></h2>
     <form method="POST" class=" d-flex justify-content align-items-center mn-vh-100">
         {{ form.hidden_tag() }}
         {{form.coursename.label(class="form-label")}}

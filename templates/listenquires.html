@@ -14,8 +14,8 @@
 {% block content1 %}  
 
 <div class="container">
-    <table class="table">
-        <thead class="bg-dark">
+    <table class="table table-bordered thead-light border p-3 mb-3">
+        <thead >
             <tr>
             <th scope="col">ID</th>
             <th scope="col">USER ID</th>
@@ -24,7 +24,7 @@
             <th scope="col">MESSAGE</th>
             <th scope="col">STATUS</th>
             <th scope="col">RESOURCE</th>
-            <th scope="col">OPTIONS </th>
+            <th scope="col" colspan="2" style="text-align: center;">OPTIONS </th>
 
             </tr>
         </thead>
@@ -34,13 +34,14 @@
                 <td>{{enquiry.enqid}}</td>
                 <td>{{enquiry.userid}}</td>
                 <td>{{enquiry.course}}</td>
-                <td>{{enquiry.DATETIME}}</td>
+                <td>{{enquiry.enquiry_date}}</td>
                 <td>{{enquiry.message}}</td>
                 <td>{{enquiry.status}}</td>
                 <td>{{enquiry.resource}}</td>
 
 
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/editenquiry/{{enquiry.enqid}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteenquiry/{{enquiry.enqid}}">DELETE</a></button></td>
+                <td style="text-align: center;"><button class="btn btn-warning"><a href="/editenquiry/{{enquiry.enqid}}">EDIT</a></button></td>
+                <td><button class="btn btn-warning"><a href="/deleteenquiry/{{enquiry.enqid}}">DELETE</a></button></td>
                 
               </tr>
             {% endfor %}

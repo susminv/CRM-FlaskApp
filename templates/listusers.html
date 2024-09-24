@@ -14,7 +14,7 @@
 {% block content1 %}  
 
 <div class="container">
-    <table class="table border p-3 mb-3">
+    <table class="table  table-bordered thead-light border p-3 mb-3">
         <thead>
             <tr>
             <th scope="col">ID</th>
@@ -29,7 +29,7 @@
             <th scope="col">QUALI.</th>
             <th scope="col">MARKS</th>
             <th scope="col">YEAR OF GRAD.</th>
-            <th scope="col">OPTIONS </th>
+            <th scope="col" colspan="2" style="text-align: center;">OPTIONS </th>
             
 
 
@@ -38,7 +38,7 @@
             <tbody>
             {% for user in all_user %}
               <tr>
-                <th scope="row">{{user.id}}</th>
+                <td scope="row">{{user.id}}</td>
                 <td>{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.username}}</td>
@@ -47,11 +47,12 @@
                 <td>{{user.address}}</td>
                 <td>{{user.gender}}</td>
                 <td>{{user.date_of_birth}}</td>
-                <td>{{user.highest_qualificationid}}</td>
+                <td>{{user.highest_qualification}}</td>
                 <td>{{user.marks}}</td>
                 <td>{{user.yearofgraduation}}</td>
 
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/edituser/{{user.id}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deleteuser/{{user.id}}">DELETE</a></button></td>
+                <td style="text-align: center;"><button class="btn "><a href="/edituser/{{user.id}}">EDIT</a></button></td>
+                <td><button class="btn"><a href="/deleteuser/{{user.id}}">DELETE</a></button></td></td>
                 
               </tr>
             {% endfor %}

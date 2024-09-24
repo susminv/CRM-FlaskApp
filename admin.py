@@ -209,9 +209,12 @@ def edit(id):
 
 @app.route('/deleteuser/<id>',methods=['GET','POST'])
 def delete(id):
+
     user=User.query.get_or_404(id)
+    Enquiries.query.filter_by(userid=id).delete()
     mydb_obj.session.delete(user)
     mydb_obj.session.commit()
+
     return redirect(url_for('listusers'))
 
 class addenquiryform(FlaskForm):
@@ -370,12 +373,12 @@ class addqualificationform(FlaskForm):
 
 @app.route('/addqualification',methods=['GET','POST'])
 def addqualification():
-    qualificationname=None
+    qualification_name=None
     form=addqualificationform()
     
     if form.validate_on_submit():
-        qualification_name=form.qualificationname.data
-        qualification=Qualifications(qualification_name=qualificationname)
+        quali=form.qualificationname.data
+        qualification=Qualifications(qualification_name=quali)
         mydb_obj.session.add(qualification)
         mydb_obj.session.commit()
         return redirect(url_for('listqualification'))

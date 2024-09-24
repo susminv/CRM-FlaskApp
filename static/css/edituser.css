@@ -2,8 +2,12 @@ form{
     color: rgb(0, 0, 0);
     margin-top: 30px;
     margin-left: 40%;
-    width: 255px;
+    width: 295px;
 
+}
+
+form label{
+    color: #ffb53e;
 }
 
 .btn{
@@ -12,15 +16,11 @@ form{
     color: white;
     margin-left: 95px;
     justify-items: center;
-    margin-left: 195px;
-
-
-
+    margin-left: 105px;
 }
 
 h2{
     justify-items: center;
     text-align: center;
-    color: rgb(0, 0, 0);
-
+    color: #ffb53e;
 }

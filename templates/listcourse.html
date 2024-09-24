@@ -14,7 +14,7 @@
 {% block content1 %}  
 
 <div class="container">
-    <table class="table border p-3 mb-3">
+    <table class="table table-bordered p-3 mb-3">
         <thead>
             <tr>
             <th scope="col">COURSE-ID</th>
@@ -24,7 +24,7 @@
             <th scope="col">DURATION(H)</th>
             <th scope="col">FEES</th>
             <th scope="col">QUALIFICATION</th>
-            <th scope="col">OPTIONS </th>
+            <th scope="col" colspan="2" style="text-align: center;">OPTIONS </th>
       
 
             </tr>
@@ -38,7 +38,8 @@
                 <td>{{course.course_duration}}</td>
                 <td>{{course.fees}}</td>
                 <td>{{course.qualification}}</td>
-                <td style="text-align: center;"><button class="btn btn-warning"><a href="/editcourse/{{course.courseid}}">EDIT</a></button>&nbsp;|&nbsp;<button class="btn btn-warning"><a href="/deletecourse/{{course.courseid}}">DELETE</a></button></td>
+                <td style="text-align: center;"><button class="btn"><a href="/editcourse/{{course.courseid}}">EDIT</a></button></td>
+                <td style="text-align: center;"><button class="btn"><a href="/deletecourse/{{course.courseid}}">DELETE</a></button></td>
                 
               </tr>
             {% endfor %}
