@@ -122,7 +122,7 @@ def about():
 
 @app.route('/courses')
 def courses():
-    return render_template('Courses.html')
+    return render_template('Courses.html',co=Courses.query.all())
 
 #============================================# Login or Sign Up options #============================================#
 
@@ -194,14 +194,58 @@ def userabout():
 def uprofile(id):
     return render_template('UserViewProfile.html',userprofile=User.query.get_or_404(id)) # view user profile
 
-@app.route('/user/edit')
-def uedit():
-    form = RegistrationForm()
-    return render_template('UserEditProfile.html',form=form) # Edit user profile
+@app.route('/user/edit/<id>', methods=['GET', 'POST'])
+def uedit(id):
+    user=User.query.get_or_404(id)
+    form = RegistrationForm(obj=user)
+    uid=user.id
+    form.qualification.choices=['10th','12th','Bachelors','Masters']
 
-@app.route('/user/delete') #delete user, and go to pre-login home page
-def udel():
-    return render_template('UserDelete.html')
+    if request.method=='GET':
+        form.firstname.data=user.firstname
+        form.lastname.data=user.lastname
+        form.password.data=user.password
+        form.username.data=user.username
+        form.age.data=user.age
+        form.phone.data=user.phone_number
+        form.email.data=user.email
+        form.address.data=user.address
+        form.gender.data=user.gender
+        form.marks.data=user.marks
+        form.qualification.data=user.highest_qualification
+        form.yearofgrad.data=user.yearofgraduation
+        form.birthday.data=user.date_of_birth
+        return render_template('UserEditProfile.html',form=form,val=uid) # Edit user profile 
+    else:
+        user.firstname=form.firstname.data
+        user.lastname=form.lastname.data
+        user.password=form.password.data
+        user.username=form.username.data
+        user.age=form.age.data
+        user.phone=form.phone.data
+        user.email=form.email.data
+        user.address=form.address.data
+        user.gender=form.gender.data
+        user.marks=form.marks.data
+        user.highest_qualification=form.qualification.data
+        user.yearofgrad=form.yearofgrad.data
+        user.dob=form.birthday.data
+        mydb_obj.session.commit()    
+        return redirect(url_for('uprofile',id=uid)) 
+
+@app.route('/user/delete/<id>') #delete user, and go to pre-login home page
+def udel(id):
+    id=id
+    return render_template('UserDelete.html',id=id)
+
+@app.route('/user/deleteconfirm/<id>',methods=['GET','POST']) #delete user, and go to pre-login home page
+def delconfirm(id):
+    user=User.query.get_or_404(id)
+    Enquiries.query.filter_by(userid=id).delete()
+    
+    mydb_obj.session.delete(user)
+    mydb_obj.session.commit()
+    return redirect(url_for('home'))
 
 
 #============================================# User Enquiry options #============================================#
@@ -209,7 +253,7 @@ def udel():
 
 @app.route('/user/courses')
 def ucourses():
-    return render_template('UserViewCourses.html') # view courses                     
+    return render_template('UserViewCourses.html',co=Courses.query.all()) # view courses                     
 
 @app.route('/user/enquire',methods=['GET','POST'])
 def uenquire():

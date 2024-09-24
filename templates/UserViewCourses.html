@@ -9,6 +9,35 @@
 <a href="#"><button type="button" class="button" id="About">About Us</button></a>
 <a href="/home"><button type="button" class="button" id="About">Logout</button></a>
 {%endblock%}
-{%block enquire%}
-<a href="/user/enquire"><button class="button-37" role="button">Enquire Now</button></a><br>
-{%endblock%}
+
+{% block page_content %}
+{%for e in co%}
+    <section class="grid-item item1">
+        <div class="flexi">
+        {# img src="{{url_for('static',filename='images/java',external=True)}}" alt="#" width="200px" #}
+        <div>
+        <h3 style="font-weight: bold;" class="text-success">{{e.coursename}}</h3>
+        <table class="table">
+            <tr>
+                <td class="cell">Duration</td>
+                <td>{{e.course_duration}}</td>
+            </tr>
+            <tr>
+                <td class="cell">Fees</td>
+                <td>{{e.fees}}</td>
+            </tr>
+            <tr>
+                <td class="cell">Description</td>
+                <td>{{e.description}}</td>
+            </tr>
+        </table>
+        </div>
+        </div>
+        {%block enquire%}
+        <a href="/user/enquire"><button class="button-37" role="button">Enquire Now</button></a><br>
+        {%endblock%}
+    </section>
+{%endfor%} 
+{%endblock%} 
+
+ 

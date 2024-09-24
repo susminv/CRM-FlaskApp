@@ -9,9 +9,10 @@
 {%block formhead%}
 <h3 style="font-weight: bold;">EDIT PROFILE</h3><br>
 {%endblock%}
-<form method="POST" action="{{ url_for('register') }}" class="edit">
+<form method="POST" action="/user/edit/{{val}}" class="edit">
     {{ form.hidden_tag() }} 
 
+    
     <div class="mb-3 form">
         <label for="username" class="form-label">{{ form.username.label }}:</label>
         {{ form.username(class="form-control") }}
@@ -81,6 +82,22 @@
         {{ form.qualification(class="form-select") }}
         {% if form.qualification.errors %}
             <div class="text-danger">{{ form.qualification.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <br>
+    <div class="mb-3 form">
+        <label for="marks" class="form-label">{{ form.marks.label }}:</label>
+        {{ form.marks(class="form-select") }}
+        {% if form.marks.errors %}
+            <div class="text-danger">{{ form.marks.errors[0] }}</div>
+        {% endif %}
+    </div>
+    <br>
+    <div class="mb-3 form">
+        <label for="yearofgrad" class="form-label">{{ form.yearofgrad.label }}:</label>
+        {{ form.yearofgrad(class="form-select") }}
+        {% if form.yearofgrad.errors %}
+            <div class="text-danger">{{ form.yearofgrad.errors[0] }}</div>
         {% endif %}
     </div>
     <br>
