@@ -7,9 +7,9 @@
 
 {%block contents%}
  <h1>Course Enquiry</h1><br>
- <form method="POST" action="{{ url_for('courses') }}">
+ <form method="POST" action="{{ url_for('uenquire') }}">
     {{ form.hidden_tag() }}
-
+ 
     <div class="mb-3 form">
         <label for="userid" class="form-label">{{ form.userid.label }} :</label>
         {{ form.userid(class="form-control") }}
@@ -19,9 +19,9 @@
     </div>
     <br>
     <div class="mb-3 form">
-        <label for="courseid" class="form-label">{{ form.courseid.label }} :</label>
-        {{ form.courseid(class="form-control") }}
-        {% if form.courseid.errors %}
+        <label for="coursename" class="form-label">{{ form.coursename.label }} :</label>
+        {{ form.coursename(class="form-control") }}
+        {% if form.coursename.errors %}
             <div class="text-danger">{{ form.courseid.errors[0] }}</div>
         {% endif %}
     </div>

@@ -1,118 +1,147 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block head %}{{super()}}
-<link rel="stylesheet" href="{{url_for('static',filename='css/Login.css',external=True)}}">
- {% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Login.css', external=True) }}">
+{% endblock %}
 {% block title %}
-{{ super() }} - Register{% endblock %}
-{%block navbuttons%}
-{{ super() }}
-{%endblock%}
+    {{ super() }} - Register
+{% endblock %}
+{% block navbuttons %}
+    {{ super() }}
+{% endblock %}
 {% block page_content %}
-    
     <section class="grid-item item1">
-        {%block formhead%}
-        <h3 style="font-weight: bold;">SIGN UP</h3><br>
-        {%endblock%}
+        <h3 style="font-weight: bold;">REGISTER</h3><br>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
         <form method="POST" action="{{ url_for('register') }}">
-            {{ form.hidden_tag() }} 
+            {{ form.hidden_tag() }}
     
             <div class="mb-3 form">
-                <label for="firstname" class="form-label">{{ form.firstname.label }}</label>
+                <label for="username" class="form-label">{{ form.username.label }}:</label>
+                {{ form.username(class="form-control") }}
+                {% if form.username.errors %}
+                    <div class="text-danger">{{ form.username.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <br>
+            <div class="mb-3 form">
+                <label for="firstname" class="form-label">{{ form.firstname.label }}:</label>
                 {{ form.firstname(class="form-control") }}
                 {% if form.firstname.errors %}
                     <div class="text-danger">{{ form.firstname.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="lastname" class="form-label">{{ form.lastname.label }}</label>
+                <label for="lastname" class="form-label">{{ form.lastname.label }}:</label>
                 {{ form.lastname(class="form-control") }}
                 {% if form.lastname.errors %}
                     <div class="text-danger">{{ form.lastname.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="birthday" class="form-label">{{ form.birthday.label }}</label>
+                <label for="age" class="form-label">{{ form.age.label }}:</label>
+                {{ form.age(class="form-control") }}
+                {% if form.age.errors %}
+                    <div class="text-danger">{{ form.age.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <br>
+            <div class="mb-3 form">
+                <label for="birthday" class="form-label">{{ form.birthday.label }}:</label>
                 {{ form.birthday(class="form-control") }}
                 {% if form.birthday.errors %}
                     <div class="text-danger">{{ form.birthday.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="gender" class="form-label">{{ form.gender.label }}</label>
+                <label for="gender" class="form-label">{{ form.gender.label }}:</label>
                 {{ form.gender(class="form-select") }}
                 {% if form.gender.errors %}
                     <div class="text-danger">{{ form.gender.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="email" class="form-label">{{ form.email.label }}</label>
+                <label for="email" class="form-label">{{ form.email.label }}:</label>
                 {{ form.email(class="form-control") }}
                 {% if form.email.errors %}
                     <div class="text-danger">{{ form.email.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="phone" class="form-label">{{ form.phone.label }}</label>
+                <label for="phone" class="form-label">{{ form.phone.label }}:</label>
                 {{ form.phone(class="form-control") }}
                 {% if form.phone.errors %}
                     <div class="text-danger">{{ form.phone.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="state" class="form-label">{{ form.state.label }}</label>
-                {{ form.state(class="form-control") }}
-                {% if form.state.errors %}
-                    <div class="text-danger">{{ form.state.errors[0] }}</div>
+                <label for="address" class="form-label">{{ form.address.label }}:</label>
+                {{ form.address(class="form-control") }}
+                {% if form.address.errors %}
+                    <div class="text-danger">{{ form.address.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="city" class="form-label">{{ form.city.label }}</label>
-                {{ form.city(class="form-control") }}
-                {% if form.city.errors %}
-                    <div class="text-danger">{{ form.city.errors[0] }}</div>
+                <label for="qualification" class="form-label">{{ form.qualification.label }}:</label>
+                {{ form.qualification(class="form-select") }}
+                {% if form.qualification.errors %}
+                    <div class="text-danger">{{ form.qualification.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="qualifications" class="form-label">{{ form.qualifications.label }}</label>
-                {{ form.qualifications(class="form-check-input") }}
-                {% if form.qualifications.errors %}
-                    <div class="text-danger">{{ form.qualifications.errors[0] }}</div>
+                <label for="marks" class="form-label">{{ form.marks.label }}:</label>
+                {{ form.marks(class="form-select") }}
+                {% if form.marks.errors %}
+                    <div class="text-danger">{{ form.marks.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="password" class="form-label">{{ form.password.label }}</label>
+                <label for="yearofgrad" class="form-label">{{ form.yearofgrad.label }}:</label>
+                {{ form.yearofgrad(class="form-select") }}
+                {% if form.yearofgrad.errors %}
+                    <div class="text-danger">{{ form.yearofgrad.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <br>
+            <div class="mb-3 form">
+                <label for="password" class="form-label">{{ form.password.label }}:</label>
                 {{ form.password(class="form-control") }}
                 {% if form.password.errors %}
                     <div class="text-danger">{{ form.password.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-    
+            </div>
+            <br>
             <div class="mb-3 form">
-                <label for="confirmpassword" class="form-label">{{ form.confirmpassword.label }}</label>
+                <label for="confirmpassword" class="form-label">{{ form.confirmpassword.label }}:</label>
                 {{ form.confirmpassword(class="form-control") }}
                 {% if form.confirmpassword.errors %}
                     <div class="text-danger">{{ form.confirmpassword.errors[0] }}</div>
                 {% endif %}
-            </div><br>
-            
-            {%block formend%}
-            <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button><br>
-            <div class="mt-3">
-                <a href="/login">Already have an account? Login</a>
             </div>
-            {%endblock%}
+            <br>
+            <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
         </form>
         <br>
-
+        <div class="mt-3">
+            <a href="/login">Already have an account? Log In</a>
+        </div>
     </section>
-{%endblock%}
+{% endblock %}

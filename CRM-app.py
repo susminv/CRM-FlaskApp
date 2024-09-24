@@ -21,27 +21,26 @@ boostrap = Bootstrap(app)
 #---------Database------------#
 
 #USER Table
-class Users(mydb_obj.Model):
-    __tablename__ = 'users'  # Explicitly define the table name
+class User(mydb_obj.Model):
+    __tablename__ = 'user'  # Explicitly define the table name
 
     id = mydb_obj.Column(mydb_obj.Integer, primary_key=True) #primary key
     username = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
+    password = mydb_obj.Column(mydb_obj.String(150), unique=False, nullable=False)
     firstname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
     lastname = mydb_obj.Column(mydb_obj.String(150), nullable=False)
-    password = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
-
     email = mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
-    phone_number = mydb_obj.Column(mydb_obj.Integer, unique=True, nullable=False)
-    address = mydb_obj.Column(mydb_obj.String(200), unique=True, nullable=False)
+    phone_number = mydb_obj.Column(mydb_obj.Integer, unique=False, nullable=False)
+    age = mydb_obj.Column(mydb_obj.Integer, unique=False, nullable=False)
+    gender = mydb_obj.Column(mydb_obj.String(101), unique=False, nullable=False)
+    address = mydb_obj.Column(mydb_obj.String(200), unique=False, nullable=False)
     date_of_birth = mydb_obj.Column(mydb_obj.Date, nullable=False)  # Date of birth
-    highest_qualificationid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
+    highest_qualification = mydb_obj.Column(mydb_obj.String(150),nullable=False) 
     marks = mydb_obj.Column(mydb_obj.Integer, nullable=False)
-    yearofgraduation =  mydb_obj.Column(mydb_obj.Integer, nullable=False)
+    yearofgraduation =  mydb_obj.Column(mydb_obj.Integer, nullable=False)  
+    role_user = mydb_obj.Column(mydb_obj.String(10), unique=False, nullable=False,default='user1')
 
-#QUALIFICATIONS Table
-class Qualifications(mydb_obj.Model):
-    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)#PK
-    qualification_name = mydb_obj.Column(mydb_obj.String(150))
+    enquiry=mydb_obj.relationship('Enquiries',backref='user',uselist=False)
 
 #COURSE Table
 class Courses(mydb_obj.Model):
@@ -50,37 +49,44 @@ class Courses(mydb_obj.Model):
     description= mydb_obj.Column(mydb_obj.String(150), unique=True, nullable=False)
     course_duration = mydb_obj.Column(mydb_obj.Integer, nullable=False)  # Duration in hours
     fees = mydb_obj.Column(mydb_obj.Integer, nullable=False)
-    qualification_id = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('qualifications.qualification_id'),nullable=False) #FK
 
-#ENQUIRIES Table
+    qualification = mydb_obj.Column(mydb_obj.String(150),nullable=False) #FK
+  
+   
 class Enquiries(mydb_obj.Model):
-
+    
     enqid = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
-    userid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('users.id'),nullable=False)
-    courseid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('courses.courseid'),nullable=False) #FK
-    message =  mydb_obj.Column(mydb_obj.String(150))
+    userid = mydb_obj.Column(mydb_obj.Integer, mydb_obj.ForeignKey('user.id'),nullable=False)
+    course = mydb_obj.Column(mydb_obj.String(100)) #FK
     enquiry_date =  mydb_obj.Column(mydb_obj.DateTime, default=datetime.now) 
-    status = mydb_obj.Column(mydb_obj.Integer,nullable=False) #FK
-    resource = mydb_obj.Column(mydb_obj.Integer, nullable=False) #FK
+    message =  mydb_obj.Column(mydb_obj.String(150))
+    status = mydb_obj.Column(mydb_obj.String(150),nullable=False,default='pending') #FK
+    resource = mydb_obj.Column(mydb_obj.String(150),nullable=False) #FK
+    
+
+class Qualifications(mydb_obj.Model):
+    qualification_id = mydb_obj.Column(mydb_obj.Integer, primary_key=True)
+    qualification_name = mydb_obj.Column(mydb_obj.String(150))
 
 #---------Form classes--------#
 class RegistrationForm(FlaskForm):
+    username=StringField('Username',validators=[DataRequired()])
     firstname = StringField('First Name', validators=[DataRequired()])
     lastname = StringField('Last Name', validators=[DataRequired()])
     birthday = DateField('Birthday', format='%Y-%m-%d', validators=[DataRequired()])
+    age = IntegerField('Age',validators=[DataRequired()])
     gender = SelectField('Gender', choices=[('Male', 'Male'), ('Female', 'Female'), ('Others', 'Others')], validators=[DataRequired()])
     email = EmailField('Email', validators=[DataRequired(), Email()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    state = StringField('State of Domicile', validators=[DataRequired()])
-    city = StringField('City', validators=[DataRequired()])
-    qualifications = RadioField(
-        'Highest Qualification',
-        choices=[('10th','10th'),('12th', '12th'), ('Bachelors', 'Bachelors'), ('Masters', 'Masters')],
-    )
+    phone = IntegerField('Phone Number', validators=[DataRequired()])
+    address=TextAreaField(' Address ')
+    qualification = SelectField('Highest qualification',choices=[],validators=[DataRequired()])
+    marks = IntegerField('Marks',validators=[DataRequired()])
+    yearofgrad =  IntegerField('Graduation year',validators=[DataRequired()])
+
     password = PasswordField('Password', validators=[
         DataRequired(),
         Length(min=8, max=20),
-        Regexp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$', 
+        Regexp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,20}$', 
                message="Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.")
     ])
     confirmpassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
@@ -93,13 +99,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class EnquiryForm(FlaskForm):
-    userid = IntegerField('User ID',validators=[DataRequired()])
-    courseid = IntegerField('Course ID',validators=[DataRequired()])
+    userid=SelectField('UserID  ',choices=[],validators=[DataRequired()])
+    coursename = SelectField('Course name  ',choices=[],validators=[DataRequired()])
     message = TextAreaField('Your message', validators=[DataRequired()])
-    resource = SelectField(
-        'Resource',
-        choices=[('1','nil'),('2','Acquaintances'),('3', 'Social Media'), ('4', 'Staff')]
-    )
+    resource=SelectField('Where did you find us',choices=[('SOCIAL MEDIA','SOCIAL MEDIA'),('FRIEND/RELATIVE','FRIEND/RELATIVE'),('GOOGLE SEARCH','GOOGLE SEARCH')],default='GOOGLE SEARCH')
     submit = SubmitField('Enquire')
 
 
@@ -131,6 +134,43 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    firstname=None
+    lastname=None
+    password=None
+    marks=None
+    username=None
+    age=None
+    email=None
+    address=None
+    gender=None
+    phone=None
+    qualification=None
+    yearofgrad=None
+    dob=None
+
+    form.qualification.choices=['10th','12th','Bachelors','Masters']
+    if form.validate_on_submit():
+        firstname=form.firstname.data
+        lastname=form.lastname.data
+        password=form.password.data
+        username=form.username.data
+        age=form.age.data
+        phone=form.phone.data
+        email=form.email.data
+        address=form.address.data
+        gender=form.gender.data
+        marks=form.marks.data
+        qualification=form.qualification.data
+        yearofgrad=form.yearofgrad.data
+        dob=form.birthday.data
+
+        user=User(firstname=firstname,lastname=lastname,age=age,email=email,password=password,username=username,phone_number=phone,address=address,gender=gender,highest_qualification=qualification,marks=marks,yearofgraduation=yearofgrad,date_of_birth=dob)
+        mydb_obj.session.add(user)
+        mydb_obj.session.commit()
+
+        flash(f'Data recieved')
+
+        return redirect(url_for('userdash'))
     return render_template('Register.html',form=form) # login page
 
 #============================================# User #============================================#
@@ -150,9 +190,9 @@ def userabout():
 #============================================# User Profile options #============================================#
 
 
-@app.route('/user/profile')
-def uprofile():
-    return render_template('UserViewProfile.html') # view user profile
+@app.route('/user/profile/<id>')
+def uprofile(id):
+    return render_template('UserViewProfile.html',userprofile=User.query.get_or_404(id)) # view user profile
 
 @app.route('/user/edit')
 def uedit():
@@ -171,15 +211,37 @@ def udel():
 def ucourses():
     return render_template('UserViewCourses.html') # view courses                     
 
-@app.route('/user/enquire')
+@app.route('/user/enquire',methods=['GET','POST'])
 def uenquire():
     form = EnquiryForm()
+
+    coursename=None
+    userid=None
+    message=None
+    resource=None
+    
+    # form.coursename.choices = [(course.coursename) for course in Courses.query.all()]
+    # form.userid.choices=[(c.id) for c in User.query.all()]
+
+    form.coursename.choices = ['Java','Python','R','Fullstack']
+    form.userid.choices=[(c.id) for c in User.query.all()]
+    if form.validate_on_submit():
+        coursename=form.coursename.data
+        userid=form.userid.data
+        message=form.message.data
+        resource=form.resource.data
+
+        enquiry=Enquiries(course=coursename,userid=userid,message=message,resource=resource)
+        mydb_obj.session.add(enquiry)
+        mydb_obj.session.commit()
+
+
+        return redirect(url_for('uviewenq',id=userid))
     return render_template('UserEnquire.html',form=form) # enquire about a course
 
-@app.route('/user/viewenquiries')
-def uviewenq():
-    return render_template('UserViewEnq.html') # view user enquiries
-
+@app.route('/user/viewenquiries/<id>')
+def uviewenq(id):
+    return render_template('UserViewEnq.html',all_enquiry=Enquiries.query.filter_by(userid=id).all()) # view user enquiries
 
 @app.route('/user/test')
 def u():
