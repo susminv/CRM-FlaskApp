@@ -16,6 +16,15 @@ app.config.from_object('config.Config')
 mydb_obj = SQLAlchemy(app)
 migrate = Migrate(app,mydb_obj)
 
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.init_app(app)
+
+#User loader for Flask-Login
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 boostrap = Bootstrap(app)
 
 #---------Database------------#
